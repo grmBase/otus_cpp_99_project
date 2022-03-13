@@ -9,6 +9,13 @@ project(mrpc_boost VERSION ${PROJECT_VESRION})
 
 
 
+# настройки для boost-а:
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+
+
+include_directories(${Boost_INCLUDE_DIR})
 
 
 
@@ -45,6 +52,12 @@ ${PROJECT_SOURCE_DIR}/./
 
 target_include_directories(mrpc_boost
     PRIVATE "${CMAKE_BINARY_DIR}"
+)
+
+
+
+target_link_libraries(mrpc_boost 
+  ${Boost_LIBRARIES}
 )
 
 
