@@ -23,7 +23,7 @@ std::string make_time()
 #if defined(_WIN32)
   localtime_s(&parts, &some);
 #else
-  parts = *localtime(&t);
+  parts = *localtime(&some);
 #endif
 
   auto milseconds = fine.time_since_epoch().count() % 1000;
@@ -38,7 +38,7 @@ std::string make_time()
     sprintf_s(buf, un_size, "%02d:%02d:%02d.%03d",
       parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
   #elif defined(__unix)
-    std::vsnprintf(buf, un_size, "%02d:%02d:%02d.%03d",
+    snprintf(buf, un_size, "%02d:%02d:%02d.%03d",
       parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
   #endif
 
