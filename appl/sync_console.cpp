@@ -31,8 +31,18 @@ std::string make_time()
 
   const size_t un_size = 32;
   char buf[un_size] = {};
-  sprintf_s(buf, un_size, "%02d:%02d:%02d.%03d",
-    parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
+
+
+  // sprintf разные хотят под разные платформы:
+  #ifdef _WIN32
+    sprintf_s(buf, un_size, "%02d:%02d:%02d.%03d",
+      parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
+  #elif defined(__unix)
+    std::vsnprintf(buf, un_size, "%02d:%02d:%02d.%03d",
+      parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
+  #endif
+
+
 
   return buf;
 }
