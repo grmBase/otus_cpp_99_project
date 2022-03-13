@@ -4,7 +4,7 @@
 #include <iostream>
 //---------------------------------------------------------------------------
 #include "tcp_connect.h"
-#include "sync_console.h"
+#include "appl/sync_console.h"
 #include "server.h"
 #include "protocol.h"
 #include "cmd_record.h"

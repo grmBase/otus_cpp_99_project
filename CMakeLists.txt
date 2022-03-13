@@ -10,9 +10,20 @@ project(mrpc_boost VERSION ${PROJECT_VESRION})
 
 
 # настройки для boost-а:
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
+#set(Boost_USE_STATIC_LIBS OFF) 
+#set(Boost_USE_MULTITHREADED ON)  
+#set(Boost_USE_STATIC_RUNTIME OFF) 
+
+
+SET (Boost_FIND_REQUIRED TRUE)
+SET (Boost_FIND_QUIETLY TRUE)
+SET (Boost_DEBUG FALSE)
+set (Boost_USE_MULTITHREADED TRUE)
+set (Boost_USE_STATIC_LIBS TRUE)
+
+
+FIND_PACKAGE(Boost COMPONENTS)
+
 
 
 include_directories(${Boost_INCLUDE_DIR})
@@ -25,6 +36,7 @@ add_executable(mrpc_boost
   lib/server.cpp
   lib/tcp_connect.cpp
 
+  appl/main.cpp
   appl/appl.cpp
   appl/global_place.cpp
   appl/sync_console.cpp
