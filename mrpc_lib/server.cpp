@@ -24,8 +24,6 @@ mrpc::i_server* mrpc::i_server::create(uint16_t aun_port, unsigned int aun_num_o
 
 
 
-
-
 mrpc::t_server::t_server(uint16_t a_port, size_t a_num_of_threads, 
   mrpc::i_listen_rp& a_listen_rp, mrpc::i_driver_rp_own& a_drv_rp)
   : m_acceptor(m_io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), a_port)),
@@ -135,51 +133,22 @@ void mrpc::t_server::asio_thread_work()
 //---------------------------------------------------------------------------
 
 
-/*
-boost::asio::thread_pool& t_server::get_pool()
-{
-  //return m_pool;
-}
-//---------------------------------------------------------------------------
-*/
-
-
 // коннектимся куда-то как клиент:
-int mrpc::t_server::client_connect()
+int mrpc::t_server::client_connect(const std::string& astr_host, const std::string& astr_port)
 {
 
   b_tcp::resolver resolver(m_io_context);
-  b_tcp::resolver::query query("127.0.0.1", "5000");
+  b_tcp::resolver::query query(astr_host, astr_port);
   b_tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 
   b_tcp::endpoint endpoint = *endpoint_iterator;
 
-  //clog::logout()
-
-
-
-  /*
-  b_tcp::endpoint endpoint(
-  //boost::asio::ip::address()
-  boost::asio::ip::address::from_string("127.0.0.1")
-  , 
-  5000);
-
-  b_tcp::socket socket(m_io_context);
-  socket.open(b_tcp::v4());
-  */
-
-  //b_tcp::socket socket(m_io_context);
 
 
   b_tcp::socket* p_socket = new b_tcp::socket(m_io_context);
 
-
-
   p_socket->async_connect(*endpoint_iterator,
-    [this, p_socket](const boost::system::error_code& a_error
-      //, const b_tcp::endpoint& a_endpoint
-      )
+    [this, p_socket](const boost::system::error_code& a_error)
     {
 
       // по любому удалим по выходу:
@@ -190,22 +159,12 @@ int mrpc::t_server::client_connect()
         return;
       }
 
-      //clog::logout("<< connection completed ok, endpoint: " + 
-      //  a_endpoint.address().to_string() + ":" + std::to_string(a_endpoint.port()));
-
       clog::logout("<< connection completed ok. remote endpoint: " +
         p_socket->remote_endpoint().address().to_string() + ":" +
         std::to_string(p_socket->remote_endpoint().port()));
 
-
       auto p_driver = std::make_shared<tcp_connect>("connect_drv", std::move(*p_socket), *this, m_drv_rp);
-      //auto p_drv = new tcp_connect("connect_drv", std::move(*p_socket), *this, m_drv_rp);
       m_listen_rp.notify_new_drv_connect(p_driver);
-
-
-      //clog::logout("<< income connection. remote endpoint: " +
-      //  a_socket.remote_endpoint().address().to_string() + ":" +
-      //  std::to_string(a_socket.remote_endpoint().port()));
 
     }
   );

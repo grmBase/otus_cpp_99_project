@@ -67,7 +67,7 @@ void t_appl::notify_new_drv_income(std::shared_ptr<mrpc::i_driver> ap_drv)
 
   clog::logout("<< in notify_new_drv(). Num of drivers in store: " + std::to_string(m_vec_drivers.size()));
 
-  auto tmp = std::unique_ptr<tst::t_custom_drv>(new tst::t_custom_drv(ap_drv, true));
+  auto tmp = std::make_unique<tst::t_custom_drv>(ap_drv, true);
 
   m_vec_drivers.emplace(std::move(tmp));
 
@@ -88,10 +88,9 @@ void t_appl::notify_new_drv_connect(std::shared_ptr<mrpc::i_driver> ap_drv)
 
   clog::logout("<< in notify_new_drv(). Num of drivers in store: " + std::to_string(m_vec_drivers.size()));
 
-  auto tmp = std::unique_ptr<tst::t_custom_drv>(new tst::t_custom_drv(ap_drv, true));
+  auto tmp = std::make_unique<tst::t_custom_drv>(ap_drv, true);
 
   m_vec_drivers.emplace(std::move(tmp));
-
 
   int n_res = ap_drv->start();
   if (n_res) {
@@ -107,29 +106,15 @@ void t_appl::notify_new_drv_connect(std::shared_ptr<mrpc::i_driver> ap_drv)
 // запрос на удаление драйвера
 void t_appl::request_to_del_drv(mrpc::i_driver* ap_drv)
 {
-
-  /*
-  std::lock_guard<std::mutex> lock(m_mutex);
-
-  clog::logout("request_to_del_drv");
-
-  size_t un_deleted = m_vec_drivers.erase(ap_drv);
-  if (un_deleted != 1) {
-    clog::log_err("Error deleting driver");
-    return;
-  }
-
-  clog::logout("driver deleted successfully");
-  return;
-  */
+  // можно будет отработать удаление сразу
 };
 //---------------------------------------------------------------------------
 
 
 
 // имитируем коннект клиента:
-int t_appl::client_connect()
+int t_appl::client_connect(const std::string& astr_host, const std::string& astr_port)
 {
-  return m_p_server->client_connect();
+  return m_p_server->client_connect(astr_host, astr_port);
 };
 //---------------------------------------------------------------------------

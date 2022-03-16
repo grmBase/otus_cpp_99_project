@@ -2,8 +2,6 @@
 #pragma once
 //---------------------------------------------------------------------------
 #include <stdint.h>
-//#include <unordered_map>
-//#include <unordered_set>
 #include <set>
 #include <memory>
 #include <mutex>
@@ -32,15 +30,12 @@ class t_appl :
 
 
     // имитируем коннект клиента:
-    int client_connect();
-
+    int client_connect(const std::string& astr_host, const std::string& astr_port);
 
 
     void notify_new_drv_income(std::shared_ptr<mrpc::i_driver> ap_drv) override;
     void notify_new_drv_connect(std::shared_ptr<mrpc::i_driver> ap_drv) override;
 
-    // отослать запрос, полученный из сети
-    //void handle_net_request(std::vector<uint8_t>& a_vec_result) override;
     
     // запрос на удаление драйвера
     void request_to_del_drv(mrpc::i_driver* ap_drv) override;
@@ -50,13 +45,6 @@ class t_appl :
     //Храним сервер
     std::unique_ptr<mrpc::i_server> m_p_server;
     
-    // указатель будет на mrpc::i_driver, а хранить будем уже наш расширенный
-    //std::unordered_set<std::weak_ptr<tst::t_custom_drv>> m_vec_drivers;
-
-
-    //using my_key = std::weak_ptr<tst::t_custom_drv>;
-    //using my_comp = std::owner_less<my_key>;
-    //std::set<my_key, my_comp> m_vec_drivers;
 
     // Внешние драйвера мы держим сами
     std::set<std::unique_ptr<tst::t_custom_drv>> m_vec_drivers;

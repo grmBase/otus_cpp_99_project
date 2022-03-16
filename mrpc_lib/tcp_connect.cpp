@@ -117,10 +117,6 @@ void mrpc::tcp_connect::tcp_connect::do_read()
         if (m_p_read_obj->m_header.m_b_sign != mrpc::protocol::c_bSign) {
           log_err("Unexpected sign byte: " + std::to_string(m_p_read_obj->m_header.m_b_sign));
 
-          //self.
-          //delete this;
-          // somehow close this connection
-
           // закроем сокет - по идее это приведёт к завершению операций
           m_socket.close();
 
@@ -251,11 +247,7 @@ void mrpc::tcp_connect::handle_complete_msg()
     }
   }
 
-  // если здесь, то 
-
-  //mp_drv_rp->handle_net_answer(m_p_read_obj->m_header.m_dw_task_id, std::move(m_p_read_obj->m_vec_payload));
   return;
-
 };
 //---------------------------------------------------------------------------
 
@@ -298,10 +290,12 @@ int mrpc::tcp_connect::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&&
   std::vector<uint8_t>& a_res)
 {
   
-  uint8_t b_first = 0;
+  /*uint8_t b_first = 0;
   if(a_buf.size()) {
     b_first = a_buf[0];
-  }
+  }*/
+
+  clog::logout("size of out_res before call: " + std::to_string(a_res.size()));
 
   // кладём задачу на выполнение, инициализируем промис для ожидания:
   std::future<t_payload> a_future;
@@ -317,25 +311,22 @@ int mrpc::tcp_connect::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&&
   logout("before future.wait()...");
   a_future.wait();
 
-
-  const auto& result = a_future.get();
-
-  bool f_is_res_ok = true;
-  for(auto& curr : result) 
-  {
-    if (curr != b_first + 1) {
-      log_err("wrong data in answer");
-      f_is_res_ok = false;
-      break;
-    }
+  bool is_valid = a_future.valid();
+  if (!is_valid) {
+    log_err("future is not valid");
+    return -33;
   }
 
-  if(!f_is_res_ok) {
-    log_err("received msg not corresponds to request?");
-  }
-  else {
-    logout("future.wait() completed. msg is OK");
-  }
+  logout("future is valid");
+
+  //const auto& result = a_future.get();
+
+  // кладём в выходные данные:
+  a_res = std::move(a_future.get());
+
+  clog::logout("size of out_res after call: " + std::to_string(a_res.size()));
+
+  logout("future.wait() completed");
 
   return 0;
 };
@@ -361,8 +352,9 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
 
 
     //todo: заменить на make_unique
-    auto rec = std::unique_ptr<mrpc::t_cmd_record>(
-      new mrpc::t_cmd_record(true, adw_task_id, adw_func_id, std::move(avec_data)));
+    //auto rec = std::unique_ptr<mrpc::t_cmd_record>(
+    //  new mrpc::t_cmd_record(true, adw_task_id, adw_func_id, std::move(avec_data)));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(true, adw_task_id, adw_func_id, std::move(avec_data));
 
     m_queue.emplace(std::move(rec));
 
@@ -390,8 +382,7 @@ int mrpc::tcp_connect::push_task_answer(uint32_t adw_task_id, std::vector<uint8_
     std::lock_guard<std::mutex> lock(m_mutex);
 
     //todo: заменить на make_unique
-    auto rec = std::unique_ptr<mrpc::t_cmd_record>(
-      new mrpc::t_cmd_record(false, adw_task_id, -1, std::move(avec_data)));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(false, adw_task_id, -1, std::move(avec_data));
 
     m_queue.emplace(std::move(rec));
 
@@ -403,55 +394,6 @@ int mrpc::tcp_connect::push_task_answer(uint32_t adw_task_id, std::vector<uint8_
   return 0;
 };
 //---------------------------------------------------------------------------
-
-
-
-/*
-// кладём задачу на выполнение:
-int mrpc::tcp_connect::push_task(bool af_is_request, uint32_t adw_task_id, uint32_t adw_func_id, std::vector<uint8_t>&& avec_data)
-{
-
-  {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    //todo: заменить на make_unique
-
-
-    uint32_t dw_task_id = 0;
-
-    if(af_is_request) {
-      dw_task_id = m_dwLastTaskID;
-      // пока просто ++ без проверки. TODO: проверить, что такой же нет в буфере, если есть, то inc пока не найдём свободной
-      m_dwLastTaskID++;
-    }
-    else {
-      dw_task_id = adw_task_id;
-    }
-
-
-    auto rec = std::unique_ptr<mrpc::t_cmd_record>(
-      new mrpc::t_cmd_record(af_is_request, dw_task_id, adw_func_id, std::move(avec_data)));
-
-    m_queue.emplace(std::move(rec));
-
-    logout("size of queue after push: " + std::to_string(m_queue.size()));
-
-
-    if (af_is_request) {
-      std::unique_ptr<mrpc::t_defer_rec> tmp(std::make_unique<mrpc::t_defer_rec>());
-      m_map_defer_tasks.emplace(m_dwLastTaskID, std::move(tmp));
-
-      logout("size of defer buf after register: " + std::to_string(m_queue.size()));
-    }
-
-    check_start_write();
-  }
-
-  return 0;
-};
-//---------------------------------------------------------------------------
-*/
-
 
 
 // кладём задачу на выполнение, инициализируем промис для ожидания:
@@ -465,8 +407,7 @@ int mrpc::tcp_connect::push_task_4block(uint32_t adw_func_id, std::vector<uint8_
     uint32_t dw_task_id = m_dwLastTaskID;
     m_dwLastTaskID++;
 
-    auto rec = std::unique_ptr<mrpc::t_cmd_record>(
-      new mrpc::t_cmd_record(true, dw_task_id, adw_func_id, std::move(avec_data)));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(true, dw_task_id, adw_func_id, std::move(avec_data));
     // пока просто ++ без проверки. TODO: проверить, что такой же нет в буфере, если есть, то inc пока не найдём свободной
     
     m_queue.emplace(std::move(rec));

@@ -89,55 +89,53 @@ class tcp_connect
     void handle_written(std::size_t a_written);
 
 
-  // обрабатываем готовую строковую инструкцию:
-  //void handle_ready_string(const std::string& astr_instr);
+    // читаем что-то из сети
+    void do_read();
 
-  // читаем что-то из сети
-  void do_read();
-
-  // пишем то, что в выходной строке
-  void do_write();
-
-  //void start_write_answer(const std::string& astr_answer);
-
-  boost::asio::ip::tcp::socket m_socket;
-
-  // блок про буфер записи. TODO: возможно потом будет блок отдельно для заголовка и отдельно для payload-а
-  std::unique_ptr<mrpc::protocol::t_read_obj> m_p_read_obj;
-
-  //std::vector<uint8_t> m_read_buf;
-  //size_t m_read_buf_pos = 0; // todo: объединить в единый объект?
+    // пишем то, что в выходной строке
+    void do_write();
 
 
-  // данные для записи. Пока считаем что владеем ими. TODO: можно подумть и получать их как buf_view
-  std::vector<uint8_t> m_write_buf;
-  size_t m_write_buf_pos = 0; // todo: объединить в единый объект?
+
+
+    // *********************** Данные ***************************************
+
+    boost::asio::ip::tcp::socket m_socket;
+
+    // блок про буфер записи. TODO: возможно потом будет блок отдельно для заголовка и отдельно для payload-а
+    std::unique_ptr<mrpc::protocol::t_read_obj> m_p_read_obj;
+
+
+    // данные для записи. Пока считаем что владеем ими. TODO: можно подумть и получать их как buf_view
+    std::vector<uint8_t> m_write_buf;
+    size_t m_write_buf_pos = 0; // todo: объединить в единый объект?
 
   
-  // ссылка на основной сервер
-  t_server& m_server;
+    // ссылка на основной сервер
+    t_server& m_server;
 
-  // приёмные части драйвера:
-  mrpc::i_driver_rp* mp_drv_rp;
-  mrpc::i_driver_rp_own& m_drv_rp_own;
-  // ---------------------------------------------------------------------------------------
+    // приёмные части драйвера:
+    mrpc::i_driver_rp* mp_drv_rp;
+    mrpc::i_driver_rp_own& m_drv_rp_own;
+    // ---------------------------------------------------------------------------------------
 
     
 
 
-  // ---------------------------------------------------------------------------------------
-  // блок про всякие отложенные задачи. Которые отослали, но ещё не получили ответа:
-  std::unordered_map<uint32_t, std::unique_ptr<mrpc::t_defer_rec>> m_map_defer_tasks;
+    // ---------------------------------------------------------------------------------------
+    // блок про всякие отложенные задачи. Которые отослали, но ещё не получили ответа:
+    std::unordered_map<uint32_t, std::unique_ptr<mrpc::t_defer_rec>> m_map_defer_tasks;
+ 
+    // id последней отосланной задачи. Просто инкрементируем её
+    uint32_t m_dwLastTaskID = {55}; // 55 - чтобы было виднее и проще отлаживать
 
-  // id последней отосланной задачи. Просто инкрементируем её
-  uint32_t m_dwLastTaskID = {55}; // 55 - чтобы было виднее и проще отлаживать
+    // для защиты данных буфера
+    mutable std::mutex m_mutex;
 
-  // для защиты данных буфера
-  mutable std::mutex m_mutex;
+    std::queue<std::unique_ptr<mrpc::t_cmd_record>> m_queue;
 
-  std::queue<std::unique_ptr<mrpc::t_cmd_record>> m_queue;
-
-  std::string m_str_drv_id;
+    // идентификация для логов
+    std::string m_str_drv_id;
 
 };
 //---------------------------------------------------------------------------

@@ -34,8 +34,8 @@ class i_server
     virtual int start_listen() = 0;
 
 
-    // коннектимся куда-то как клиент:
-    virtual int client_connect() = 0;
+    // коннектимся как клиент:
+    virtual int client_connect(const std::string& astr_host, const std::string& astr_port) = 0;
 
 
     // останавливает нитки контекста

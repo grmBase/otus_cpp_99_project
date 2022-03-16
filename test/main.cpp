@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
   std::cout << "Detected params: tcp port: " << n_port << std::endl;
 
 
+
   try
   {
 
@@ -48,39 +49,30 @@ int main(int argc, char* argv[])
 
 
 
-  /*
+
   try
   {
     t_appl appl(n_port);
-
-
 
     // добавим клиентский коннект:
     {
       // чуть подождём:
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      int n_res = appl.client_connect();
+      int n_res = appl.client_connect("127.0.0.1", std::to_string(n_port));
       if (n_res) {
         clog::log_err("error in client_connect()");
         return n_res;
       }
     }
-    
 
-    clog::logout("press any key to stop and exit");
-    std::getchar();
-
-
-    //clog::logout("before call stop()");
-    //server.stop();
-    //clog::logout("after stop()");
+    // Подождём 10 сек, и выходим:
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
   }
   catch(const std::exception& aexc)
   {
     clog::log_err(std::string("caught exeption: ") + aexc.what());
     return -33;
   }
-  */
 
 
   return 0;

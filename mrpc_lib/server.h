@@ -39,7 +39,7 @@ class t_server : public mrpc::i_server
 
 
     // коннектимся куда-то как клиент:
-    int client_connect() override;
+    int client_connect(const std::string& astr_host, const std::string& astr_port) override;
 
     // 
     //boost::asio::thread_pool& get_pool();
