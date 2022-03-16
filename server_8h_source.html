@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Vector editor: lib/server.h Source File</title>
+<title>Vector editor: mrpc_lib/server.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_e4f5f1398bda9a6056c9fb92d737ad31.html">mrpc_lib</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,14 +77,14 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//#include &lt;boost/asio/thread_pool.hpp&gt; // для организации пула потоков</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;boost/asio/post.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="i__server_8h.html">include/mrpc/i_server.h</a>&quot;</span>   <span class="comment">// наследуемся</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../include/mrpc/i_server.h&quot;</span>   <span class="comment">// наследуемся</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keyword">class </span>i_driver_rp_own;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>};</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">   16</a></span><span class="keyword">using</span> <a class="code hl_typedef" href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a> = boost::asio::ip::tcp;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">   16</a></span><span class="keyword">using</span> <a class="code hl_typedef" href="iocp__block_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a> = boost::asio::ip::tcp;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// коннектимся куда-то как клиент:</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#afd6d21b4acba9e5efba4edd26a762225">client_connect</a>();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#ac49f83f56cf2e481e3ab45c6e134782d">client_connect</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// </span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">//boost::asio::thread_pool&amp; get_pool();</span></div>
@@ -155,16 +155,15 @@ $(function() {
 <div class="ttc" id="aclassmrpc_1_1i__listen__rp_html"><div class="ttname"><a href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a></div><div class="ttdef"><b>Definition:</b> i_listen_rp.h:16</div></div>
 <div class="ttc" id="aclassmrpc_1_1i__server_html"><div class="ttname"><a href="classmrpc_1_1i__server.html">mrpc::i_server</a></div><div class="ttdef"><b>Definition:</b> i_server.h:19</div></div>
 <div class="ttc" id="aclassmrpc_1_1t__server_html"><div class="ttname"><a href="classmrpc_1_1t__server.html">mrpc::t_server</a></div><div class="ttdef"><b>Definition:</b> server.h:24</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a2116ba2fb01d60444aceec86d1ecba7d"><div class="ttname"><a href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">mrpc::t_server::start_threads</a></div><div class="ttdeci">int start_threads() override</div><div class="ttdef"><b>Definition:</b> server.cpp:93</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a768d5627065f2c464f52eba3d3cd5e5c"><div class="ttname"><a href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">mrpc::t_server::asio_thread_work</a></div><div class="ttdeci">void asio_thread_work()</div><div class="ttdef"><b>Definition:</b> server.cpp:119</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a2116ba2fb01d60444aceec86d1ecba7d"><div class="ttname"><a href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">mrpc::t_server::start_threads</a></div><div class="ttdeci">int start_threads() override</div><div class="ttdef"><b>Definition:</b> server.cpp:90</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a768d5627065f2c464f52eba3d3cd5e5c"><div class="ttname"><a href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">mrpc::t_server::asio_thread_work</a></div><div class="ttdeci">void asio_thread_work()</div><div class="ttdef"><b>Definition:</b> server.cpp:116</div></div>
 <div class="ttc" id="aclassmrpc_1_1t__server_html_a7a96001499ad034e1f1c727f63f6598f"><div class="ttname"><a href="classmrpc_1_1t__server.html#a7a96001499ad034e1f1c727f63f6598f">mrpc::t_server::~t_server</a></div><div class="ttdeci">~t_server()</div><div class="ttdef"><b>Definition:</b> server.cpp:44</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_ad3eaf39b797278a791735e2fbc040b5f"><div class="ttname"><a href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">mrpc::t_server::stop</a></div><div class="ttdeci">int stop() override</div><div class="ttdef"><b>Definition:</b> server.cpp:109</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_ac49f83f56cf2e481e3ab45c6e134782d"><div class="ttname"><a href="classmrpc_1_1t__server.html#ac49f83f56cf2e481e3ab45c6e134782d">mrpc::t_server::client_connect</a></div><div class="ttdeci">int client_connect() override</div><div class="ttdef"><b>Definition:</b> server.cpp:148</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_ad3eaf39b797278a791735e2fbc040b5f"><div class="ttname"><a href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">mrpc::t_server::stop</a></div><div class="ttdeci">int stop() override</div><div class="ttdef"><b>Definition:</b> server.cpp:106</div></div>
 <div class="ttc" id="aclassmrpc_1_1t__server_html_ada0b4830291c3ae2c659ff8ef3a7548d"><div class="ttname"><a href="classmrpc_1_1t__server.html#ada0b4830291c3ae2c659ff8ef3a7548d">mrpc::t_server::t_server</a></div><div class="ttdeci">t_server(uint16_t a_port, size_t a_num_of_threads, mrpc::i_listen_rp &amp;a_listen_rp, mrpc::i_driver_rp_own &amp;a_drv_rp)</div><div class="ttdef"><b>Definition:</b> server.cpp:29</div></div>
 <div class="ttc" id="aclassmrpc_1_1t__server_html_ae5fdff42c34c2459ed95806a73790ae2"><div class="ttname"><a href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">mrpc::t_server::start_listen</a></div><div class="ttdeci">int start_listen() override</div><div class="ttdef"><b>Definition:</b> server.cpp:56</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_afd6d21b4acba9e5efba4edd26a762225"><div class="ttname"><a href="classmrpc_1_1t__server.html#afd6d21b4acba9e5efba4edd26a762225">mrpc::t_server::client_connect</a></div><div class="ttdeci">int client_connect()</div><div class="ttdef"><b>Definition:</b> server.cpp:151</div></div>
-<div class="ttc" id="ai__server_8h_html"><div class="ttname"><a href="i__server_8h.html">i_server.h</a></div></div>
+<div class="ttc" id="aiocp__block_8h_html_a829b9050b5b45759db9fe3c58d9fcf4b"><div class="ttname"><a href="iocp__block_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a></div><div class="ttdeci">boost::asio::ip::tcp b_tcp</div><div class="ttdef"><b>Definition:</b> iocp_block.h:6</div></div>
 <div class="ttc" id="anamespacemrpc_html"><div class="ttname"><a href="namespacemrpc.html">mrpc</a></div><div class="ttdef"><b>Definition:</b> i_driver.h:9</div></div>
-<div class="ttc" id="aserver_8h_html_a829b9050b5b45759db9fe3c58d9fcf4b"><div class="ttname"><a href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a></div><div class="ttdeci">boost::asio::ip::tcp b_tcp</div><div class="ttdef"><b>Definition:</b> server.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

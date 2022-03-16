@@ -86,14 +86,14 @@ Inheritance diagram for mrpc::i_listen_rp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8a97c4a9cac9adb81e23bc55e20abca1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#a8a97c4a9cac9adb81e23bc55e20abca1">notify_new_drv_income</a> (<a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &amp;a_drv)=0</td></tr>
-<tr class="separator:a8a97c4a9cac9adb81e23bc55e20abca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12bd84e86b842b77eed145e5e479073d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#a12bd84e86b842b77eed145e5e479073d">notify_new_drv_connect</a> (<a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &amp;a_drv)=0</td></tr>
-<tr class="separator:a12bd84e86b842b77eed145e5e479073d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed574cb778e8759751a7665494aacbc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#a5ed574cb778e8759751a7665494aacbc">notify_new_drv_income</a> (std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt; a_drv)=0</td></tr>
+<tr class="separator:a5ed574cb778e8759751a7665494aacbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc55d2b39246f7d0432229c6cf12bb00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#abc55d2b39246f7d0432229c6cf12bb00">notify_new_drv_connect</a> (std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt; a_drv)=0</td></tr>
+<tr class="separator:abc55d2b39246f7d0432229c6cf12bb00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a12bd84e86b842b77eed145e5e479073d" name="a12bd84e86b842b77eed145e5e479073d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12bd84e86b842b77eed145e5e479073d">&#9670;&nbsp;</a></span>notify_new_drv_connect()</h2>
+<a id="abc55d2b39246f7d0432229c6cf12bb00" name="abc55d2b39246f7d0432229c6cf12bb00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc55d2b39246f7d0432229c6cf12bb00">&#9670;&nbsp;</a></span>notify_new_drv_connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +104,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void mrpc::i_listen_rp::notify_new_drv_connect </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &amp;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt;&#160;</td>
           <td class="paramname"><em>a_drv</em></td><td>)</td>
           <td></td>
         </tr>
@@ -116,12 +116,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classt__appl.html#ac1a217277cf17c84f7e16b80e7e86b7b">t_appl</a>.</p>
-
 </div>
 </div>
-<a id="a8a97c4a9cac9adb81e23bc55e20abca1" name="a8a97c4a9cac9adb81e23bc55e20abca1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a97c4a9cac9adb81e23bc55e20abca1">&#9670;&nbsp;</a></span>notify_new_drv_income()</h2>
+<a id="a5ed574cb778e8759751a7665494aacbc" name="a5ed574cb778e8759751a7665494aacbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed574cb778e8759751a7665494aacbc">&#9670;&nbsp;</a></span>notify_new_drv_income()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +130,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void mrpc::i_listen_rp::notify_new_drv_income </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &amp;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt;&#160;</td>
           <td class="paramname"><em>a_drv</em></td><td>)</td>
           <td></td>
         </tr>
@@ -143,8 +141,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classt__appl.html#ad6b346571bd8bc67503b0c78f869fc27">t_appl</a>.</p>
 
 </div>
 </div>

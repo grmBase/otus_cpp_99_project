@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Vector editor: appl/tst_custom_drv.h Source File</title>
+<title>Vector editor: test/tst_custom_drv.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_41f0edb22d8bc4576dbfcc5cc68c2070.html">appl</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -79,8 +79,8 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="i__driver_8h.html">include/mrpc/i_driver.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="i__driver__rp_8h.html">include/mrpc/i_driver_rp.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../include/mrpc/i_driver.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;../include/mrpc/i_driver_rp.h&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classtst_1_1t__custom__drv.html#ace100a6be94c0f435a42491f3cb9d14e">t_custom_drv</a>(<a class="code hl_class" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a>&amp; a_drv, <span class="keywordtype">bool</span> af_send_requests);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classtst_1_1t__custom__drv.html#ae500033782e2ab4faef529de2ab7dd49">t_custom_drv</a>(std::shared_ptr&lt;mrpc::i_driver&gt; ap_drv, <span class="keywordtype">bool</span> af_send_requests);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classtst_1_1t__custom__drv.html#ace999f4f3bd81501b10e487b6b7a414f">~t_custom_drv</a>();</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
@@ -120,32 +120,30 @@ $(function() {
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">int</span> make_request();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">// указатель на основной &quot;рабочий&quot; драйвер mrpc</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    std::unique_ptr&lt;mrpc::i_driver&gt; mp_drv;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">//std::unique_ptr&lt;mrpc::i_driver&gt; mp_drv;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    std::shared_ptr&lt;mrpc::i_driver&gt; mp_drv;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// нитка из которой будем посылать запросы</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    std::thread m_thread;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">bool</span> m_exit_flag = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">mutable</span> std::mutex m_mutex;     <span class="comment">// защита от мнгопоточного доступа</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::condition_variable m_cv;   <span class="comment">// сигнал наличия работы</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="comment">// нитка из которой будем посылать запросы</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    std::thread m_thread;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">bool</span> m_exit_flag = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">mutable</span> std::mutex m_mutex;     <span class="comment">// защита от мнгопоточного доступа</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    std::condition_variable m_cv;   <span class="comment">// сигнал наличия работы</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>} <span class="comment">// tst</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// tst</span></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver__rp_html"><div class="ttname"><a href="classmrpc_1_1i__driver__rp.html">mrpc::i_driver_rp</a></div><div class="ttdef"><b>Definition:</b> i_driver_rp.h:15</div></div>
-<div class="ttc" id="aclassmrpc_1_1i__driver_html"><div class="ttname"><a href="classmrpc_1_1i__driver.html">mrpc::i_driver</a></div><div class="ttdef"><b>Definition:</b> i_driver.h:19</div></div>
 <div class="ttc" id="aclasstst_1_1t__custom__drv_html"><div class="ttname"><a href="classtst_1_1t__custom__drv.html">tst::t_custom_drv</a></div><div class="ttdef"><b>Definition:</b> tst_custom_drv.h:23</div></div>
-<div class="ttc" id="aclasstst_1_1t__custom__drv_html_a54432720f80c927fc585caa6492b00bf"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#a54432720f80c927fc585caa6492b00bf">tst::t_custom_drv::work</a></div><div class="ttdeci">void work()</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:37</div></div>
-<div class="ttc" id="aclasstst_1_1t__custom__drv_html_a88c9abaa8ec4555b6606e425f3d37ed5"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#a88c9abaa8ec4555b6606e425f3d37ed5">tst::t_custom_drv::handle_net_request</a></div><div class="ttdeci">void handle_net_request(uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:156</div></div>
-<div class="ttc" id="aclasstst_1_1t__custom__drv_html_ace100a6be94c0f435a42491f3cb9d14e"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#ace100a6be94c0f435a42491f3cb9d14e">tst::t_custom_drv::t_custom_drv</a></div><div class="ttdeci">t_custom_drv(mrpc::i_driver &amp;a_drv, bool af_send_requests)</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:11</div></div>
-<div class="ttc" id="aclasstst_1_1t__custom__drv_html_ace999f4f3bd81501b10e487b6b7a414f"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#ace999f4f3bd81501b10e487b6b7a414f">tst::t_custom_drv::~t_custom_drv</a></div><div class="ttdeci">~t_custom_drv()</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:91</div></div>
-<div class="ttc" id="aclasstst_1_1t__custom__drv_html_af1673263b5920c4d602687d5c455420f"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#af1673263b5920c4d602687d5c455420f">tst::t_custom_drv::handle_net_answer</a></div><div class="ttdeci">void handle_net_answer(uint32_t adw_req_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:186</div></div>
-<div class="ttc" id="ai__driver_8h_html"><div class="ttname"><a href="i__driver_8h.html">i_driver.h</a></div></div>
-<div class="ttc" id="ai__driver__rp_8h_html"><div class="ttname"><a href="i__driver__rp_8h.html">i_driver_rp.h</a></div></div>
+<div class="ttc" id="aclasstst_1_1t__custom__drv_html_a54432720f80c927fc585caa6492b00bf"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#a54432720f80c927fc585caa6492b00bf">tst::t_custom_drv::work</a></div><div class="ttdeci">void work()</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:35</div></div>
+<div class="ttc" id="aclasstst_1_1t__custom__drv_html_a88c9abaa8ec4555b6606e425f3d37ed5"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#a88c9abaa8ec4555b6606e425f3d37ed5">tst::t_custom_drv::handle_net_request</a></div><div class="ttdeci">void handle_net_request(uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:154</div></div>
+<div class="ttc" id="aclasstst_1_1t__custom__drv_html_ace999f4f3bd81501b10e487b6b7a414f"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#ace999f4f3bd81501b10e487b6b7a414f">tst::t_custom_drv::~t_custom_drv</a></div><div class="ttdeci">~t_custom_drv()</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:89</div></div>
+<div class="ttc" id="aclasstst_1_1t__custom__drv_html_ae500033782e2ab4faef529de2ab7dd49"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#ae500033782e2ab4faef529de2ab7dd49">tst::t_custom_drv::t_custom_drv</a></div><div class="ttdeci">t_custom_drv(std::shared_ptr&lt; mrpc::i_driver &gt; ap_drv, bool af_send_requests)</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:11</div></div>
+<div class="ttc" id="aclasstst_1_1t__custom__drv_html_af1673263b5920c4d602687d5c455420f"><div class="ttname"><a href="classtst_1_1t__custom__drv.html#af1673263b5920c4d602687d5c455420f">tst::t_custom_drv::handle_net_answer</a></div><div class="ttdeci">void handle_net_answer(uint32_t adw_req_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</div><div class="ttdef"><b>Definition:</b> tst_custom_drv.cpp:184</div></div>
 <div class="ttc" id="anamespacetst_html"><div class="ttname"><a href="namespacetst.html">tst</a></div><div class="ttdef"><b>Definition:</b> tst_custom_drv.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
