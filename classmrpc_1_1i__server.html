@@ -93,8 +93,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5b256bd493542383966f8248e87c22d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c14bec4df591c54c4fe37c8960421a0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0">start_listen</a> ()=0</td></tr>
 <tr class="separator:a4c14bec4df591c54c4fe37c8960421a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac079b8dfa15de68d670c3d8e050c2276"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#ac079b8dfa15de68d670c3d8e050c2276">client_connect</a> ()=0</td></tr>
-<tr class="separator:ac079b8dfa15de68d670c3d8e050c2276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc2201079104a626459a403c64663a53"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#afc2201079104a626459a403c64663a53">client_connect</a> (const std::string &amp;astr_host, const std::string &amp;astr_port)=0</td></tr>
+<tr class="separator:afc2201079104a626459a403c64663a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6373152f2989814ad451c04b8ef68c5b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b">stop</a> ()=0</td></tr>
 <tr class="separator:a6373152f2989814ad451c04b8ef68c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -130,8 +130,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac079b8dfa15de68d670c3d8e050c2276" name="ac079b8dfa15de68d670c3d8e050c2276"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac079b8dfa15de68d670c3d8e050c2276">&#9670;&nbsp;</a></span>client_connect()</h2>
+<a id="afc2201079104a626459a403c64663a53" name="afc2201079104a626459a403c64663a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc2201079104a626459a403c64663a53">&#9670;&nbsp;</a></span>client_connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,8 +142,19 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual int mrpc::i_server::client_connect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>astr_host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>astr_port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -153,7 +164,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#ac49f83f56cf2e481e3ab45c6e134782d">mrpc::t_server</a>.</p>
+<p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">mrpc::t_server</a>.</p>
 
 </div>
 </div>

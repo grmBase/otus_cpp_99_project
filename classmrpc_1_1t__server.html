@@ -107,8 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae5fdff42c34c2459ed95806a73790ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3eaf39b797278a791735e2fbc040b5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">stop</a> () override</td></tr>
 <tr class="separator:ad3eaf39b797278a791735e2fbc040b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac49f83f56cf2e481e3ab45c6e134782d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1t__server.html#ac49f83f56cf2e481e3ab45c6e134782d">client_connect</a> () override</td></tr>
-<tr class="separator:ac49f83f56cf2e481e3ab45c6e134782d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aeadf60f95ff918feb81f839dccc1fd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">client_connect</a> (const std::string &amp;astr_host, const std::string &amp;astr_port) override</td></tr>
+<tr class="separator:a1aeadf60f95ff918feb81f839dccc1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmrpc_1_1i__server"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmrpc_1_1i__server')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a></td></tr>
 <tr class="memitem:a4649eca47e46d89158d5ba79b33ec5a8 inherit pub_methods_classmrpc_1_1i__server"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a4649eca47e46d89158d5ba79b33ec5a8">~i_server</a> ()</td></tr>
 <tr class="separator:a4649eca47e46d89158d5ba79b33ec5a8 inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5b256bd493542383966f8248e87c22d5 inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c14bec4df591c54c4fe37c8960421a0 inherit pub_methods_classmrpc_1_1i__server"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0">start_listen</a> ()=0</td></tr>
 <tr class="separator:a4c14bec4df591c54c4fe37c8960421a0 inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac079b8dfa15de68d670c3d8e050c2276 inherit pub_methods_classmrpc_1_1i__server"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#ac079b8dfa15de68d670c3d8e050c2276">client_connect</a> ()=0</td></tr>
-<tr class="separator:ac079b8dfa15de68d670c3d8e050c2276 inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc2201079104a626459a403c64663a53 inherit pub_methods_classmrpc_1_1i__server"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#afc2201079104a626459a403c64663a53">client_connect</a> (const std::string &amp;astr_host, const std::string &amp;astr_port)=0</td></tr>
+<tr class="separator:afc2201079104a626459a403c64663a53 inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6373152f2989814ad451c04b8ef68c5b inherit pub_methods_classmrpc_1_1i__server"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b">stop</a> ()=0</td></tr>
 <tr class="separator:a6373152f2989814ad451c04b8ef68c5b inherit pub_methods_classmrpc_1_1i__server"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -203,8 +203,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ac49f83f56cf2e481e3ab45c6e134782d" name="ac49f83f56cf2e481e3ab45c6e134782d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac49f83f56cf2e481e3ab45c6e134782d">&#9670;&nbsp;</a></span>client_connect()</h2>
+<a id="a1aeadf60f95ff918feb81f839dccc1fd" name="a1aeadf60f95ff918feb81f839dccc1fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aeadf60f95ff918feb81f839dccc1fd">&#9670;&nbsp;</a></span>client_connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,8 +215,19 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">int mrpc::t_server::client_connect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>astr_host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>astr_port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -226,7 +237,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classmrpc_1_1i__server.html#ac079b8dfa15de68d670c3d8e050c2276">mrpc::i_server</a>.</p>
+<p>Implements <a class="el" href="classmrpc_1_1i__server.html#afc2201079104a626459a403c64663a53">mrpc::i_server</a>.</p>
 
 </div>
 </div>
