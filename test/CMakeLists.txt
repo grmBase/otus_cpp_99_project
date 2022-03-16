@@ -97,5 +97,5 @@ endif()
 
 
 # регистрируем тест:
-add_test(mrpc_boost mrpc_test)
+add_test(mrpc_boost mrpc_test 5000)
 
