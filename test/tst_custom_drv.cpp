@@ -4,15 +4,13 @@
 //---------------------------------------------------------------------------
 #include "tst_custom_drv.h"
 //---------------------------------------------------------------------------
-#include "sync_console.h" // логи
+#include "include/sconsole/sync_console.h" // логи
 //---------------------------------------------------------------------------
 
 
-tst::t_custom_drv::t_custom_drv(mrpc::i_driver& a_drv, bool af_send_requests)
+tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, bool af_send_requests)
+  :mp_drv(ap_drv)
 {
-
-  // запоминаем драйвер:
-  mp_drv.reset(&a_drv);
 
   mp_drv->set_drv_rp(this);
 
@@ -90,7 +88,7 @@ void tst::t_custom_drv::work()
 
 tst::t_custom_drv::~t_custom_drv()
 {
-  clog::logout("int destructor of t_custom_drv()");
+  clog::logout("in destructor of t_custom_drv()");
 
 
   clog::logout("before set_exit() flag for thread...");

@@ -29,9 +29,8 @@ using t_payload = std::vector<std::uint8_t>;
 
 
 class tcp_connect
-  : public mrpc::i_driver
-  //public std::enable_shared_from_this<tcp_connect>
-
+  : public mrpc::i_driver,
+    public std::enable_shared_from_this<tcp_connect>
 {
 
   public:

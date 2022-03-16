@@ -6,7 +6,7 @@
 //#include <boost/asio/thread_pool.hpp> // для организации пула потоков
 #include <boost/asio/post.hpp>
 //---------------------------------------------------------------------------
-#include "include/mrpc/i_server.h"   // наследуемся
+#include "../include/mrpc/i_server.h"   // наследуемся
 //---------------------------------------------------------------------------
 namespace mrpc
 {
@@ -39,7 +39,7 @@ class t_server : public mrpc::i_server
 
 
     // коннектимся куда-то как клиент:
-    int client_connect();
+    int client_connect() override;
 
     // 
     //boost::asio::thread_pool& get_pool();

@@ -10,7 +10,7 @@
 #include "include/mrpc/i_driver_rp_own.h"  // отсылаем созданные драйвера
 //---------------------------------------------------------------------------
 #include "tcp_connect.h"
-#include "appl/sync_console.h" // выводим логи синхронизованно
+#include "include/sconsole/sync_console.h" // выводим логи синхронизованно
 //---------------------------------------------------------------------------
 
 
@@ -76,12 +76,9 @@ void mrpc::t_server::do_accept()
         a_socket.remote_endpoint().address().to_string() + ":" +
         std::to_string(a_socket.remote_endpoint().port()));
 
+      auto p_driver = std::make_shared<tcp_connect>("recv_drv", std::move(a_socket), *this, m_drv_rp);
 
-      //std::make_shared<tcp_connect>(std::move(a_socket), *this)->start();
-
-      auto p_drv = new tcp_connect("recv_drv", std::move(a_socket), *this, m_drv_rp);
-
-      m_listen_rp.notify_new_drv_income(*p_drv);
+      m_listen_rp.notify_new_drv_income(p_driver);
 
       do_accept();
 
@@ -201,8 +198,9 @@ int mrpc::t_server::client_connect()
         std::to_string(p_socket->remote_endpoint().port()));
 
 
-      auto p_drv = new tcp_connect("connect_drv", std::move(*p_socket), *this, m_drv_rp);
-      m_listen_rp.notify_new_drv_connect(*p_drv);
+      auto p_driver = std::make_shared<tcp_connect>("connect_drv", std::move(*p_socket), *this, m_drv_rp);
+      //auto p_drv = new tcp_connect("connect_drv", std::move(*p_socket), *this, m_drv_rp);
+      m_listen_rp.notify_new_drv_connect(p_driver);
 
 
       //clog::logout("<< income connection. remote endpoint: " +

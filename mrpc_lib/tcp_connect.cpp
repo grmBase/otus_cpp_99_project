@@ -4,7 +4,7 @@
 #include <iostream>
 //---------------------------------------------------------------------------
 #include "tcp_connect.h"
-#include "appl/sync_console.h"
+#include "include/sconsole/sync_console.h"
 #include "server.h"
 #include "protocol.h"
 #include "cmd_record.h"
@@ -33,6 +33,8 @@ mrpc::tcp_connect::~tcp_connect()
 {
   logout("in destructor of tcp_connect");
 
+
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   // пробежимся и "отпустим" все ожидающие задачи
   for(auto& curr : m_map_defer_tasks)
@@ -73,13 +75,13 @@ void mrpc::tcp_connect::tcp_connect::do_read()
   std::pair<uint8_t*, size_t> buf = m_p_read_obj->get_curr_data();
 
 
-  //auto self(shared_from_this());
-  // 
   //m_socket.async_read_some(boost::asio::buffer(m_read_buf, c_un_buf_length),
 
+
+  auto self(shared_from_this());
   m_socket.async_read_some(boost::asio::buffer(buf.first, buf.second),
  
-    [this /*self*/](boost::system::error_code a_error, std::size_t a_readed)
+    [this, self](boost::system::error_code a_error, std::size_t a_readed)
     {
       if(a_error) {
         if(a_error == boost::asio::error::eof) {
@@ -90,7 +92,7 @@ void mrpc::tcp_connect::tcp_connect::do_read()
         };
 
         logout("sending request to del drv...");
-        m_drv_rp_own.request_to_del_drv(this);
+        //m_drv_rp_own.request_to_del_drv(this);
 
         return; 
       }
@@ -98,7 +100,7 @@ void mrpc::tcp_connect::tcp_connect::do_read()
 
       if(!a_readed) {
         log_err("zero receied? something strange");
-        m_drv_rp_own.request_to_del_drv(this);
+        //m_drv_rp_own.request_to_del_drv(this);
         return;
       }
 
@@ -144,9 +146,10 @@ void mrpc::tcp_connect::tcp_connect::do_read()
 void mrpc::tcp_connect::do_write()
 {
 
+  auto self(shared_from_this());
   boost::asio::async_write(m_socket, boost::asio::buffer(&(m_write_buf[m_write_buf_pos]), m_write_buf.size() - m_write_buf_pos),    
 
-    [this](boost::system::error_code a_error, std::size_t a_written)
+    [this, self](boost::system::error_code a_error, std::size_t a_written)
     {
       if (a_error) {
         if (a_error == boost::asio::error::eof) {
@@ -158,14 +161,14 @@ void mrpc::tcp_connect::do_write()
 
 
         logout("sending request to del drv...");
-        m_drv_rp_own.request_to_del_drv(this);
+        //m_drv_rp_own.request_to_del_drv(this);
 
         return;
       }
 
       if(!a_written) {
         logout("nothing was written? Strange...");
-        m_drv_rp_own.request_to_del_drv(this);
+        //m_drv_rp_own.request_to_del_drv(this);
         return;
       }
 
@@ -492,12 +495,13 @@ void mrpc::tcp_connect::check_start_write()
     return;
   }
 
-  logout("No writing right now, so let's order writing");
-
   if(!m_queue.size()) {
     logout("queue is empty. nothing to send");
     return;
   }
+
+  logout("No writing right now, but we have tasks. so let's order writing");
+
 
   // "сериализуем" первую в очереди запись:
   const auto& record = m_queue.front();

@@ -17,10 +17,10 @@ class i_listen_rp
   public:
 
     // то что к серверу кто-то подключился
-    virtual void notify_new_drv_income(mrpc::i_driver& a_drv) = 0;
+    virtual void notify_new_drv_income(std::shared_ptr<mrpc::i_driver> a_drv) = 0;
 
     // то, что мы клиентом к кому-то подключились
-    virtual void notify_new_drv_connect(mrpc::i_driver& a_drv) = 0;
+    virtual void notify_new_drv_connect(std::shared_ptr<mrpc::i_driver> a_drv) = 0;
 
 };
 //---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread> //this_thread
 //---------------------------------------------------------------------------
-#include "sync_console.h"
+#include "include/sconsole/sync_console.h"
 //---------------------------------------------------------------------------
 
 

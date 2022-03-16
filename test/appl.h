@@ -2,15 +2,17 @@
 #pragma once
 //---------------------------------------------------------------------------
 #include <stdint.h>
-#include <unordered_map>
+//#include <unordered_map>
+//#include <unordered_set>
+#include <set>
 #include <memory>
 #include <mutex>
 //---------------------------------------------------------------------------
-#include "include/mrpc/i_server.h"
-#include "include/mrpc/i_listen_rp.h"
+#include "../include/mrpc/i_server.h"
+#include "../include/mrpc/i_listen_rp.h"
 //---------------------------------------------------------------------------
-#include "include/mrpc/i_driver.h"
-#include "include/mrpc/i_driver_rp_own.h"
+#include "../include/mrpc/i_driver.h"
+#include "../include/mrpc/i_driver_rp_own.h"
 //---------------------------------------------------------------------------
 #include "tst_custom_drv.h"  // тут храним эти драйвера
 //---------------------------------------------------------------------------
@@ -34,8 +36,8 @@ class t_appl :
 
 
 
-    void notify_new_drv_income(mrpc::i_driver& a_drv) override;
-    void notify_new_drv_connect(mrpc::i_driver& a_drv) override;
+    void notify_new_drv_income(std::shared_ptr<mrpc::i_driver> ap_drv) override;
+    void notify_new_drv_connect(std::shared_ptr<mrpc::i_driver> ap_drv) override;
 
     // отослать запрос, полученный из сети
     //void handle_net_request(std::vector<uint8_t>& a_vec_result) override;
@@ -49,7 +51,16 @@ class t_appl :
     std::unique_ptr<mrpc::i_server> m_p_server;
     
     // указатель будет на mrpc::i_driver, а хранить будем уже наш расширенный
-    std::unordered_map<uintptr_t, std::unique_ptr<tst::t_custom_drv>> m_vec_drivers;
+    //std::unordered_set<std::weak_ptr<tst::t_custom_drv>> m_vec_drivers;
+
+
+    //using my_key = std::weak_ptr<tst::t_custom_drv>;
+    //using my_comp = std::owner_less<my_key>;
+    //std::set<my_key, my_comp> m_vec_drivers;
+
+    // Внешние драйвера мы держим сами
+    std::set<std::unique_ptr<tst::t_custom_drv>> m_vec_drivers;
+
 
     mutable std::mutex m_mutex;
 

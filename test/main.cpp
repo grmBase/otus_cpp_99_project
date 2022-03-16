@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------
 #include <iostream>
 //---------------------------------------------------------------------------
-//#include "server.h"
 #include "appl.h"
 //---------------------------------------------------------------------------
-#include "sync_console.h"
+#include "include/sconsole/sync_console.h"
+#include "include/mrpc/iocp_block.h"
 //---------------------------------------------------------------------------
 
 
@@ -23,6 +23,32 @@ int main(int argc, char* argv[])
   std::cout << "Detected params: tcp port: " << n_port << std::endl;
 
 
+  try
+  {
+
+    t_appl appl(n_port);
+
+
+    // запускаем блокирующие тесты:
+    t_iocp_block iocp_block{};
+
+    int n_res = iocp_block.send_recieve_custom_msg("127.0.0.1", n_port);
+    if (n_res) {
+      clog::log_err("error in send_recieve_custom_msg");
+      return n_res;
+    }
+    clog::logout("send_receive passed OK");
+
+  }
+  catch (const std::exception& aexc)
+  {
+    clog::log_err(std::string("caught exeption: ") + aexc.what());
+    return -33;
+  }
+
+
+
+  /*
   try
   {
     t_appl appl(n_port);
@@ -54,6 +80,8 @@ int main(int argc, char* argv[])
     clog::log_err(std::string("caught exeption: ") + aexc.what());
     return -33;
   }
+  */
+
 
   return 0;
 }

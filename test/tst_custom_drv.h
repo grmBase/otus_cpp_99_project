@@ -8,8 +8,8 @@
 #include <mutex>
 #include <condition_variable>
 //---------------------------------------------------------------------------
-#include "include/mrpc/i_driver.h"
-#include "include/mrpc/i_driver_rp.h"
+#include "../include/mrpc/i_driver.h"
+#include "../include/mrpc/i_driver_rp.h"
 //---------------------------------------------------------------------------
 
 
@@ -23,7 +23,7 @@ class t_custom_drv : public mrpc::i_driver_rp
 {
   public:
 
-    t_custom_drv(mrpc::i_driver& a_drv, bool af_send_requests);
+    t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, bool af_send_requests);
 
     ~t_custom_drv();
 
@@ -49,7 +49,8 @@ class t_custom_drv : public mrpc::i_driver_rp
     int make_request();
     
     // указатель на основной "рабочий" драйвер mrpc
-    std::unique_ptr<mrpc::i_driver> mp_drv;
+    //std::unique_ptr<mrpc::i_driver> mp_drv;
+    std::shared_ptr<mrpc::i_driver> mp_drv;
 
 
 
