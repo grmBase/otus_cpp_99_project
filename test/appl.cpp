@@ -10,13 +10,11 @@
 
 t_appl::t_appl(uint16_t aun_listen_port)
 {
-
   clog::logout("in constructor of appl");
 
   // число потоков возьмём исходя из числа CPU:
   const auto processor_count = std::thread::hardware_concurrency();
   std::cout << "num of CPU cores detected: " << processor_count << std::endl;
-
 
   clog::logout("before creating server...");
   m_p_server.reset(mrpc::i_server::create(aun_listen_port, processor_count, *this, *this));
