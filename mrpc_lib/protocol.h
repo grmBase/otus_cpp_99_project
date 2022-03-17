@@ -60,12 +60,12 @@ struct t_msg_header
   //---------------------------------------------------------------------------
 
 
-  uint8_t m_b_sign = c_bSign;       // просто определённое значение
+  uint8_t m_b_sign = c_bSign;    // просто определённое значение
   uint16_t m_w_sequence = 0x32;  // пока не используется
   uint8_t m_b_reserved = 0x33;   // пока не используется
 
 
-  bool m_is_request = true;        // флаг если ли посылка запрос или ответ
+  bool m_is_request = true;      // флаг если ли посылка запрос или ответ
   cmd_type m_b_cmd_id = cmd_type::undefined;    // тип команды если это запрос и -1 если это ответ
   uint32_t m_dw_task_id = std::numeric_limits<uint32_t>::max();  // ID запроса
 
