@@ -10,7 +10,6 @@
 
 t_iocp_block::t_iocp_block()
 {
-
 };
 //---------------------------------------------------------------------------
 
@@ -47,7 +46,6 @@ int t_iocp_block::send_recieve_custom_msg(const std::string& astr_host, uint16_t
   header_cmd.m_dw_buf_size = payload_size;
   header_cmd.m_dw_task_id = 345;
 
-
   
   n_res = block_socket.write_buf((uint8_t*)&header_cmd, sizeof(header_cmd));
   if (n_res) {
@@ -55,22 +53,7 @@ int t_iocp_block::send_recieve_custom_msg(const std::string& astr_host, uint16_t
     return n_res;
   }
 
-  /*size_t un_written = block_socket.m_socket.write_some(boost::asio::buffer(&header, sizeof(header)));
-  if (un_written != sizeof(header)) {
-    clog::log_err("Error in write()");
-    return -33;
-  }*/
-
-
   std::vector<uint8_t> vec_payload(payload_size);
-
-  /*
-  un_written = block_socket.m_socket.write_some(boost::asio::buffer(&vec_payload[0], vec_payload.size()));
-  if (un_written != vec_payload.size()) {
-    clog::log_err("Error in write()");
-    return -33;
-  }
-  */
 
   n_res = block_socket.write_buf((uint8_t*)&vec_payload[0], vec_payload.size());
   if (n_res) {
@@ -82,19 +65,27 @@ int t_iocp_block::send_recieve_custom_msg(const std::string& astr_host, uint16_t
   // заполним, отошлём хидер:
   mrpc::protocol::t_msg_header header_reply;
   n_res = block_socket.read_buf((uint8_t*)&header_reply, sizeof(header_reply));
-  if (n_res) {
+  if(n_res) {
     clog::log_err("error in read_buf() for header");
     return n_res;
   }
 
-  if (header_reply.m_dw_buf_size != header_cmd.m_dw_buf_size) {
+
+  if(header_reply.m_dw_task_id != header_cmd.m_dw_task_id) {
+    clog::log_err("incorrect task ID in reply");
+    return n_res;
+  }
+
+  if(header_reply.m_dw_buf_size != header_cmd.m_dw_buf_size) {
     clog::log_err("incorrect reply header");
     return n_res;
   }
 
+
+
   std::vector<uint8_t> vec_payload_reply(payload_size);
   n_res = block_socket.read_buf((uint8_t*)&(vec_payload_reply[0]), vec_payload_reply.size());
-  if (n_res) {
+  if(n_res) {
     clog::log_err("error in read_buf() for body");
     return n_res;
   }

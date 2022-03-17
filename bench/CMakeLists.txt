@@ -8,13 +8,6 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(mrpc_boost VERSION ${PROJECT_VESRION})
 
 
-
-# настройки для boost-а:
-#set(Boost_USE_STATIC_LIBS OFF) 
-#set(Boost_USE_MULTITHREADED ON)  
-#set(Boost_USE_STATIC_RUNTIME OFF) 
-
-
 SET (Boost_FIND_REQUIRED TRUE)
 SET (Boost_FIND_QUIETLY TRUE)
 SET (Boost_DEBUG FALSE)
@@ -24,9 +17,7 @@ set (Boost_USE_STATIC_LIBS TRUE)
 
 FIND_PACKAGE(Boost COMPONENTS)
 
-# используем gtest
-find_package(GTest REQUIRED)
-
+find_package(benchmark REQUIRED)
 
 
 include_directories(${Boost_INCLUDE_DIR})
@@ -34,27 +25,24 @@ include_directories(${Boost_INCLUDE_DIR})
 
 
 # имя основной утилиты будет таким же как и имя проекта?
-add_executable(mrpc_test
+add_executable(mrpc_bench
 
   main.cpp
-  work_obj.cpp
-
-  appl.cpp
-  global_place.cpp
-
-  tst_custom_drv.cpp
+  ../test/appl.cpp
+  ../test/global_place.cpp
+  ../test/tst_custom_drv.cpp
 )
 
 
 
-set_target_properties(mrpc_test PROPERTIES
+set_target_properties(mrpc_bench PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
 
 
-target_include_directories(mrpc_test PUBLIC
+target_include_directories(mrpc_bench PUBLIC
 ${PROJECT_SOURCE_DIR}/./
 )
 
@@ -64,15 +52,17 @@ ${PROJECT_SOURCE_DIR}/./
 #add_library(helloworld lib.cpp)
 #add_executable(test_version test_version.cpp)
 
-target_include_directories(mrpc_test
+target_include_directories(mrpc_bench
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
 
 
-target_link_libraries(mrpc_test 
+target_link_libraries(mrpc_bench 
+
   ${Boost_LIBRARIES}
-  ${GTEST_LIBRARIES}
+  benchmark::benchmark
+
   mrpc_lib
 )
 
@@ -80,7 +70,7 @@ target_link_libraries(mrpc_test
 
 # для linux нужно ещё pthread:
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  target_link_libraries(mrpc_test 
+  target_link_libraries(mrpc_bench 
     pthread
   )
 endif ()
@@ -89,16 +79,16 @@ endif ()
 
 
 if (MSVC)
-    target_compile_options(mrpc_test PRIVATE
+    target_compile_options(mrpc_bench PRIVATE
         /W4
     )
 else ()
-    #target_compile_options(mrpc_test PRIVATE
+    #target_compile_options(mrpc_bench PRIVATE
     #    -Wall -Wextra -pedantic -Werror
     #)
 endif()
 
 
 # регистрируем тест:
-add_test(mrpc_boost mrpc_test)
+add_test(mrpc_boost mrpc_bench)
 

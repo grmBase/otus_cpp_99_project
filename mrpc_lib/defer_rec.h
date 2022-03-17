@@ -42,9 +42,6 @@ class t_defer_rec
 
   private:
 
-    // пока ерунда. Потом здесь будет что-то на чём можно ждать. future/promise?
-    std::string m_str_info;
-
     std::promise<t_payload> m_promise;
 
 };

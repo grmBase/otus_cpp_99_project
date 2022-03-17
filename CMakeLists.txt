@@ -4,6 +4,9 @@ project(mrpc_boost)
 
 enable_testing()
 
+
 add_subdirectory(mrpc_lib)
 
 add_subdirectory(test)
+
+add_subdirectory(bench)
