@@ -131,12 +131,12 @@ $(function() {
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  uint8_t m_b_sign = <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a>;       <span class="comment">// просто определённое значение</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  uint8_t m_b_sign = <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a>;    <span class="comment">// просто определённое значение</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  uint16_t m_w_sequence = 0x32;  <span class="comment">// пока не используется</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  uint8_t m_b_reserved = 0x33;   <span class="comment">// пока не используется</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">bool</span> m_is_request = <span class="keyword">true</span>;        <span class="comment">// флаг если ли посылка запрос или ответ</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">bool</span> m_is_request = <span class="keyword">true</span>;      <span class="comment">// флаг если ли посылка запрос или ответ</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> m_b_cmd_id = <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">cmd_type::undefined</a>;    <span class="comment">// тип команды если это запрос и -1 если это ответ</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  uint32_t m_dw_task_id = std::numeric_limits&lt;uint32_t&gt;::max();  <span class="comment">// ID запроса</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>

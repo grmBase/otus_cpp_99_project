@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['read_5fbuf_0',['read_buf',['../classt__socket__block.html#a7859f9ff60167e542567131701706443',1,'t_socket_block']]],
-  ['request_5fto_5fdel_5fdrv_1',['request_to_del_drv',['../classmrpc_1_1i__driver__rp__own.html#a8d6f9e6f6f20e9d65f627f3c6f55aac0',1,'mrpc::i_driver_rp_own::request_to_del_drv()'],['../classt__appl.html#a7eab27a8f89cfa6c87c2850b914662b6',1,'t_appl::request_to_del_drv()']]],
-  ['reset_2',['reset',['../structmrpc_1_1protocol_1_1t__read__obj.html#a85fe2d5d93da887a9f29e535899d360d',1,'mrpc::protocol::t_read_obj']]]
+  ['put_5fanswer_0',['put_answer',['../classmrpc_1_1i__driver.html#adf4f29f365a8341f1908472379c640f0',1,'mrpc::i_driver::put_answer()'],['../classmrpc_1_1tcp__connect.html#a0d8cc0247b6849c57bf0713e46f00d3f',1,'mrpc::tcp_connect::put_answer()']]],
+  ['put_5frequest_1',['put_request',['../classmrpc_1_1i__driver.html#a69d703fa64ee8eed47d544c7fff7df29',1,'mrpc::i_driver::put_request()'],['../classmrpc_1_1tcp__connect.html#ac1da50855aad8e2c95bdcd471162e89b',1,'mrpc::tcp_connect::put_request()']]]
 ];

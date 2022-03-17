@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['t_5fappl_0',['t_appl',['../classt__appl.html#ab581c92082feb9bd18013303631b4c7f',1,'t_appl']]],
-  ['t_5fcmd_5frecord_1',['t_cmd_record',['../classmrpc_1_1t__cmd__record.html#a56177d8237e59475e8728a3980c0291f',1,'mrpc::t_cmd_record']]],
-  ['t_5fcustom_5fdrv_2',['t_custom_drv',['../classtst_1_1t__custom__drv.html#ae500033782e2ab4faef529de2ab7dd49',1,'tst::t_custom_drv']]],
-  ['t_5fdefer_5frec_3',['t_defer_rec',['../classmrpc_1_1t__defer__rec.html#a061089c87ff7c214fbbb04218c1ed7d9',1,'mrpc::t_defer_rec::t_defer_rec(std::future&lt; t_payload &gt; &amp;a_future)'],['../classmrpc_1_1t__defer__rec.html#a232273f6b2785adaecb6030d8ef2f067',1,'mrpc::t_defer_rec::t_defer_rec()']]],
-  ['t_5fiocp_5fblock_4',['t_iocp_block',['../classt__iocp__block.html#aaa7f01f6902315728877d05991253f27',1,'t_iocp_block']]],
-  ['t_5fserver_5',['t_server',['../classmrpc_1_1t__server.html#ada0b4830291c3ae2c659ff8ef3a7548d',1,'mrpc::t_server']]],
-  ['t_5fsocket_5fblock_6',['t_socket_block',['../classt__socket__block.html#a6718416650b0b4b938a357ec71a0a8bf',1,'t_socket_block']]],
-  ['tcp_5fconnect_7',['tcp_connect',['../classmrpc_1_1tcp__connect.html#abf561fb9757d7f9baa55c6a351974922',1,'mrpc::tcp_connect']]]
+  ['send_5frecieve_5fcustom_5fmsg_0',['send_recieve_custom_msg',['../classt__iocp__block.html#a37b9236d17bfa26a691666a372e2eb37',1,'t_iocp_block']]],
+  ['send_5fwrong_5fheader_5fmsg_1',['send_wrong_header_msg',['../classt__iocp__block.html#a73361b9024e17ecfc35700bcb16ab59a',1,'t_iocp_block']]],
+  ['set_5fdrv_5frp_2',['set_drv_rp',['../classmrpc_1_1i__driver.html#ace4659868862896caea555dd791efb1a',1,'mrpc::i_driver::set_drv_rp()'],['../classmrpc_1_1tcp__connect.html#ad1d570b54b371a9edbc58745a8800669',1,'mrpc::tcp_connect::set_drv_rp()']]],
+  ['set_5fpromise_3',['set_promise',['../classmrpc_1_1t__defer__rec.html#a19b434fd5f588c5ecba04401d23619dd',1,'mrpc::t_defer_rec']]],
+  ['start_4',['start',['../classmrpc_1_1i__driver.html#a2dbb2f60c8d37a973fb5b3e249ce012d',1,'mrpc::i_driver::start()'],['../classmrpc_1_1tcp__connect.html#ae6c0ccef7150e1e699964fc588e901de',1,'mrpc::tcp_connect::start()']]],
+  ['start_5flisten_5',['start_listen',['../classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0',1,'mrpc::i_server::start_listen()'],['../classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2',1,'mrpc::t_server::start_listen()']]],
+  ['start_5fthreads_6',['start_threads',['../classmrpc_1_1i__server.html#a5b256bd493542383966f8248e87c22d5',1,'mrpc::i_server::start_threads()'],['../classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d',1,'mrpc::t_server::start_threads()']]],
+  ['stop_7',['stop',['../classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b',1,'mrpc::i_server::stop()'],['../classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f',1,'mrpc::t_server::stop()']]]
 ];

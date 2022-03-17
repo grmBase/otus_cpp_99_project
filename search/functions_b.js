@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['send_5frecieve_5fcustom_5fmsg_0',['send_recieve_custom_msg',['../classt__iocp__block.html#a37b9236d17bfa26a691666a372e2eb37',1,'t_iocp_block']]],
-  ['send_5fwrong_5fheader_5fmsg_1',['send_wrong_header_msg',['../classt__iocp__block.html#a73361b9024e17ecfc35700bcb16ab59a',1,'t_iocp_block']]],
-  ['set_5fdrv_5frp_2',['set_drv_rp',['../classmrpc_1_1i__driver.html#ace4659868862896caea555dd791efb1a',1,'mrpc::i_driver::set_drv_rp()'],['../classmrpc_1_1tcp__connect.html#ad1d570b54b371a9edbc58745a8800669',1,'mrpc::tcp_connect::set_drv_rp()']]],
-  ['set_5fpromise_3',['set_promise',['../classmrpc_1_1t__defer__rec.html#a19b434fd5f588c5ecba04401d23619dd',1,'mrpc::t_defer_rec']]],
-  ['start_4',['start',['../classmrpc_1_1i__driver.html#a2dbb2f60c8d37a973fb5b3e249ce012d',1,'mrpc::i_driver::start()'],['../classmrpc_1_1tcp__connect.html#ae6c0ccef7150e1e699964fc588e901de',1,'mrpc::tcp_connect::start()']]],
-  ['start_5flisten_5',['start_listen',['../classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0',1,'mrpc::i_server::start_listen()'],['../classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2',1,'mrpc::t_server::start_listen()']]],
-  ['start_5fthreads_6',['start_threads',['../classmrpc_1_1i__server.html#a5b256bd493542383966f8248e87c22d5',1,'mrpc::i_server::start_threads()'],['../classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d',1,'mrpc::t_server::start_threads()']]],
-  ['stop_7',['stop',['../classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b',1,'mrpc::i_server::stop()'],['../classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f',1,'mrpc::t_server::stop()']]]
+  ['read_5fbuf_0',['read_buf',['../classt__socket__block.html#a7859f9ff60167e542567131701706443',1,'t_socket_block']]],
+  ['request_5fto_5fdel_5fdrv_1',['request_to_del_drv',['../classmrpc_1_1i__driver__rp__own.html#a8d6f9e6f6f20e9d65f627f3c6f55aac0',1,'mrpc::i_driver_rp_own::request_to_del_drv()'],['../classt__appl.html#a7eab27a8f89cfa6c87c2850b914662b6',1,'t_appl::request_to_del_drv()']]],
+  ['reset_2',['reset',['../structmrpc_1_1protocol_1_1t__read__obj.html#a85fe2d5d93da887a9f29e535899d360d',1,'mrpc::protocol::t_read_obj']]]
 ];
