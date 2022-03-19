@@ -110,13 +110,18 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classmrpc_1_1i__driver.html#a995740ae209716b4217782cbe9943a0c">   39</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1i__driver.html#a995740ae209716b4217782cbe9943a0c">exec_request</a>(uint32_t adw_func_id, std::vector&lt;uint8_t&gt;&amp;&amp; a_buf, </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      std::vector&lt;uint8_t&gt;&amp; a_res) = 0;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classmrpc_1_1i__driver.html#a0a63c750208301696c2c356731919ba1">   42</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classmrpc_1_1i__driver.html#a0a63c750208301696c2c356731919ba1">clear_drv_rp</a>() = 0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>} <span class="comment">// mrpc</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>} <span class="comment">// mrpc</span></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver__rp_html"><div class="ttname"><a href="classmrpc_1_1i__driver__rp.html">mrpc::i_driver_rp</a></div><div class="ttdef"><b>Definition:</b> i_driver_rp.h:15</div></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver_html"><div class="ttname"><a href="classmrpc_1_1i__driver.html">mrpc::i_driver</a></div><div class="ttdef"><b>Definition:</b> i_driver.h:19</div></div>
+<div class="ttc" id="aclassmrpc_1_1i__driver_html_a0a63c750208301696c2c356731919ba1"><div class="ttname"><a href="classmrpc_1_1i__driver.html#a0a63c750208301696c2c356731919ba1">mrpc::i_driver::clear_drv_rp</a></div><div class="ttdeci">virtual void clear_drv_rp()=0</div></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver_html_a2dbb2f60c8d37a973fb5b3e249ce012d"><div class="ttname"><a href="classmrpc_1_1i__driver.html#a2dbb2f60c8d37a973fb5b3e249ce012d">mrpc::i_driver::start</a></div><div class="ttdeci">virtual int start()=0</div></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver_html_a69d703fa64ee8eed47d544c7fff7df29"><div class="ttname"><a href="classmrpc_1_1i__driver.html#a69d703fa64ee8eed47d544c7fff7df29">mrpc::i_driver::put_request</a></div><div class="ttdeci">virtual int put_request(uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_buf, uint32_t &amp;adw_req_id)=0</div></div>
 <div class="ttc" id="aclassmrpc_1_1i__driver_html_a6ca91c52e8d5ef3b2a1e7e5d039bac17"><div class="ttname"><a href="classmrpc_1_1i__driver.html#a6ca91c52e8d5ef3b2a1e7e5d039bac17">mrpc::i_driver::~i_driver</a></div><div class="ttdeci">virtual ~i_driver()</div><div class="ttdef"><b>Definition:</b> i_driver.h:25</div></div>

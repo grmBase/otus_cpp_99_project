@@ -101,6 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abf561fb9757d7f9baa55c6a351974922"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b8012a67ce2246ee3b52665ad3eb75f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1tcp__connect.html#a2b8012a67ce2246ee3b52665ad3eb75f">~tcp_connect</a> ()</td></tr>
 <tr class="separator:a2b8012a67ce2246ee3b52665ad3eb75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cf8aed37a225913467c7d5bdc092ac4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1tcp__connect.html#a1cf8aed37a225913467c7d5bdc092ac4">clear_drv_rp</a> ()</td></tr>
+<tr class="separator:a1cf8aed37a225913467c7d5bdc092ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1d570b54b371a9edbc58745a8800669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1tcp__connect.html#ad1d570b54b371a9edbc58745a8800669">set_drv_rp</a> (<a class="el" href="classmrpc_1_1i__driver__rp.html">mrpc::i_driver_rp</a> *ap_drv_rp) override</td></tr>
 <tr class="separator:ad1d570b54b371a9edbc58745a8800669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c0ccef7150e1e699964fc588e901de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1tcp__connect.html#ae6c0ccef7150e1e699964fc588e901de">start</a> () override</td></tr>
@@ -126,6 +128,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adf4f29f365a8341f1908472379c640f0 inherit pub_methods_classmrpc_1_1i__driver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a995740ae209716b4217782cbe9943a0c inherit pub_methods_classmrpc_1_1i__driver"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__driver.html#a995740ae209716b4217782cbe9943a0c">exec_request</a> (uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_buf, std::vector&lt; uint8_t &gt; &amp;a_res)=0</td></tr>
 <tr class="separator:a995740ae209716b4217782cbe9943a0c inherit pub_methods_classmrpc_1_1i__driver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a63c750208301696c2c356731919ba1 inherit pub_methods_classmrpc_1_1i__driver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__driver.html#a0a63c750208301696c2c356731919ba1">clear_drv_rp</a> ()=0</td></tr>
+<tr class="separator:a0a63c750208301696c2c356731919ba1 inherit pub_methods_classmrpc_1_1i__driver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abf561fb9757d7f9baa55c6a351974922" name="abf561fb9757d7f9baa55c6a351974922"></a>
@@ -186,6 +190,33 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1cf8aed37a225913467c7d5bdc092ac4" name="a1cf8aed37a225913467c7d5bdc092ac4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cf8aed37a225913467c7d5bdc092ac4">&#9670;&nbsp;</a></span>clear_drv_rp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mrpc::tcp_connect::clear_drv_rp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classmrpc_1_1i__driver.html#a0a63c750208301696c2c356731919ba1">mrpc::i_driver</a>.</p>
+
+</div>
+</div>
 <a id="aacf626952644309b4f0ba8cf4df96930" name="aacf626952644309b4f0ba8cf4df96930"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aacf626952644309b4f0ba8cf4df96930">&#9670;&nbsp;</a></span>exec_request()</h2>
 
