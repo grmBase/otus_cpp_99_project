@@ -8,6 +8,8 @@
 #include <mutex>
 #include <condition_variable>
 //---------------------------------------------------------------------------
+#include <boost/asio/thread_pool.hpp> // для организации пула потоков
+//---------------------------------------------------------------------------
 #include "../include/mrpc/i_driver.h"
 #include "../include/mrpc/i_driver_rp.h"
 //---------------------------------------------------------------------------
@@ -23,7 +25,7 @@ class t_custom_drv : public mrpc::i_driver_rp
 {
   public:
 
-    t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, bool af_send_requests);
+    t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, size_t a_num_of_threads, bool af_send_requests);
 
     ~t_custom_drv();
 
@@ -39,6 +41,8 @@ class t_custom_drv : public mrpc::i_driver_rp
     void handle_net_answer(uint32_t adw_req_id, std::vector<uint8_t>&& a_vec_request) override;
 
 
+
+
   private:
 
     // делаем некий блокирующий вызов:
@@ -48,10 +52,14 @@ class t_custom_drv : public mrpc::i_driver_rp
     // делаем сетевой запрос
     int make_request();
     
-    // указатель на основной "рабочий" драйвер mrpc
-    //std::unique_ptr<mrpc::i_driver> mp_drv;
-    std::shared_ptr<mrpc::i_driver> mp_drv;
 
+    // пул потоков для "медленных", пользовательских функций
+    boost::asio::thread_pool m_pool;
+
+
+
+    // указатель на основной "рабочий" драйвер mrpc
+    std::weak_ptr<mrpc::i_driver> mp_drv;
 
 
     // нитка из которой будем посылать запросы

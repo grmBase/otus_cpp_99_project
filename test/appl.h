@@ -2,7 +2,8 @@
 #pragma once
 //---------------------------------------------------------------------------
 #include <stdint.h>
-#include <set>
+//#include <set>
+#include <unordered_map>
 #include <memory>
 #include <mutex>
 //---------------------------------------------------------------------------
@@ -46,8 +47,8 @@ class t_appl :
     std::unique_ptr<mrpc::i_server> m_p_server;
     
 
-    // Внешние драйвера мы держим сами
-    std::set<std::unique_ptr<tst::t_custom_drv>> m_vec_drivers;
+    // Ключём будет указатель на внутренний драйвер, а хранить по нему будем наш, кастомный
+    std::unordered_map<mrpc::i_driver*, std::unique_ptr<tst::t_custom_drv>> m_vec_drivers;
 
 
     mutable std::mutex m_mutex;

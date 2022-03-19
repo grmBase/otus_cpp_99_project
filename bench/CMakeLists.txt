@@ -90,6 +90,5 @@ endif()
 
 
 # регистрируем тест:
-# пока закоментировал - тест подвисает
-# add_test(mrpc_boost mrpc_bench)
+add_test(mrpc_boost mrpc_bench)
 

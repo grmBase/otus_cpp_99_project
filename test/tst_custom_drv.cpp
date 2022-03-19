@@ -3,17 +3,31 @@
 #include <vector>    //
 #include <algorithm> // std::transform
 //---------------------------------------------------------------------------
+#include <boost/asio.hpp>
+//---------------------------------------------------------------------------
 #include "tst_custom_drv.h"
 //---------------------------------------------------------------------------
 #include "include/sconsole/sync_console.h" // логи
 //---------------------------------------------------------------------------
 
 
-tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, bool af_send_requests)
-  :mp_drv(ap_drv)
+tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, size_t a_num_of_threads,
+  bool af_send_requests)
+  : mp_drv(ap_drv),
+    m_pool{a_num_of_threads}
 {
 
-  mp_drv->set_drv_rp(this);
+  
+  {
+    auto p_tmp = mp_drv.lock();
+    if(p_tmp) {
+      p_tmp->set_drv_rp(this);
+    }
+    else {
+      clog::log_err("driver is nullptr");
+    }
+  }
+  
 
   clog::logout("in constructor of t_custom_drv()");
 
@@ -49,7 +63,7 @@ void tst::t_custom_drv::work()
   while(true)
   {
 
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::unique_lock lock(m_mutex);
     while(!m_exit_flag) 
     {
       auto result = m_cv.wait_for(lock, std::chrono::milliseconds(3000));
@@ -101,11 +115,17 @@ tst::t_custom_drv::~t_custom_drv()
 {
   clog::logout("in destructor of t_custom_drv()");
 
+  {
+    auto p_drv = mp_drv.lock();
+    if(p_drv) {
+      p_drv->clear_drv_rp();
+    };
+  }
 
   clog::logout("before set_exit() flag for thread...");
   {
     {
-      std::lock_guard<std::mutex> lk(m_mutex);
+      std::lock_guard lk(m_mutex);
       m_exit_flag = true;
     }
 
@@ -136,7 +156,8 @@ int tst::t_custom_drv::make_request()
 
   std::vector<uint8_t> vec_in_buf(500000, 0);
   uint32_t dw_req_id = 0;
-  int n_res = mp_drv->put_request(0, std::move(vec_in_buf), dw_req_id);
+  auto tmp = mp_drv.lock();
+  int n_res = tmp->put_request(0, std::move(vec_in_buf), dw_req_id);
   if (n_res) {
     clog::log_err("error in exec_request()");
     return n_res;
@@ -155,7 +176,13 @@ int tst::t_custom_drv::exec_block_call()
   std::vector<uint8_t> vec_in_buf(500000, 0);
   std::vector<uint8_t> vec_res_buf;
 
-  int n_res = mp_drv->exec_request(0, std::move(vec_in_buf), vec_res_buf);
+
+  auto tmp = mp_drv.lock();
+  if (!tmp) {
+    clog::log_err("!!! driver is empty");
+    return -33;
+  }
+  int n_res = tmp->exec_request(1, std::move(vec_in_buf), vec_res_buf);
   if (n_res) {
     clog::log_err("Error in exec_request(). code: " + std::to_string(n_res));
     return n_res;
@@ -210,12 +237,49 @@ void tst::t_custom_drv::handle_net_request(uint32_t adw_req_id,
       {
         return x+1;
       });
+    
 
-    int n_res = mp_drv->put_answer(adw_req_id, std::move(vec_results));
-    if(n_res) {
-      clog::log_err("Error in put_answer()");
-      return;
+    auto p_tmp = mp_drv.lock();
+    if(p_tmp) {
+      int n_res = p_tmp->put_answer(adw_req_id, std::move(vec_results));
+      if(n_res) {
+        clog::log_err("Error in put_answer()");
+        return;
+      }
     }
+    else {
+      clog::log_err("error in put_answer()");
+    }
+
+    return;
+  }
+
+  if(adw_func_id == 1) 
+  {
+    boost::asio::post(m_pool, 
+      [adw_req_id, this]
+      {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        clog::logout("handling in thread completed");
+
+        // пока просто что-нибудь вернуть, todo: реально что-то модифицировать
+        std::vector<uint8_t> vec_results;
+
+        auto tmp = mp_drv.lock();
+        if (!tmp) {
+          clog::log_err("error drv is already null");
+          return;
+        }
+
+        int n_res = tmp->put_answer(adw_req_id, std::move(vec_results));
+        if (n_res) {
+          clog::log_err("Error in put_answer()");
+          return;
+        }
+
+      }
+    );
+
     return;
   }
 

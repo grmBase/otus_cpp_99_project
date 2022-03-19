@@ -52,7 +52,7 @@ std::string make_time()
 
 void t_sync_console::log_info_inst(const std::string_view& astr_info)
 {
-  std::lock_guard<std::mutex> lock(m_mutex);
+  std::lock_guard lock(m_mutex);
 
   std::cout << make_time() << " [trk] [tid:" << std::this_thread::get_id() << "] " << astr_info << std::endl;
 }
@@ -73,7 +73,7 @@ void t_sync_console::log_err_inst(const std::string_view& astr_info)
 {
 
 #ifdef DBG_LOGGING
-  std::lock_guard<std::mutex> lock(m_mutex);
+  std::lock_guard lock(m_mutex);
 
   std::cerr << make_time() << " [err] [tid:" << std::this_thread::get_id() << "] " << astr_info << std::endl;
 #endif

@@ -39,6 +39,10 @@ class i_driver
     virtual int exec_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, 
       std::vector<uint8_t>& a_res) = 0;
 
+    virtual void clear_drv_rp() = 0;
+
+
+
 };
 //---------------------------------------------------------------------------
 

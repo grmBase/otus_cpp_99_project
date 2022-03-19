@@ -22,9 +22,11 @@ TEST(CheckBlockCall, SomeInfo1)
   // запускаем блокирующие тесты:
   t_iocp_block iocp_block{};
 
-  int n_res = iocp_block.send_recieve_custom_msg("127.0.0.1", n_port);
-  EXPECT_EQ(n_res, 0) << "result is ok";
-  clog::logout("send_receive passed OK");
+  for(size_t i=0; i<70; ++i) {
+    int n_res = iocp_block.send_recieve_custom_msg("127.0.0.1", n_port);
+    EXPECT_EQ(n_res, 0) << "result is ok";
+    clog::logout("--------- send_recieve_custom_msg() passed OK ----------, iteration: " + std::to_string(i));
+  };
 }
 //---------------------------------------------------------------------------
 

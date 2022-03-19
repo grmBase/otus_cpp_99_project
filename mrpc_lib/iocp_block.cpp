@@ -53,7 +53,7 @@ int t_iocp_block::send_recieve_custom_msg(const std::string& astr_host, uint16_t
     return n_res;
   }
 
-  std::vector<uint8_t> vec_payload(payload_size);
+  std::vector<uint8_t> vec_payload(payload_size, 33);
 
   n_res = block_socket.write_buf((uint8_t*)&vec_payload[0], vec_payload.size());
   if (n_res) {
@@ -62,9 +62,9 @@ int t_iocp_block::send_recieve_custom_msg(const std::string& astr_host, uint16_t
   }
 
 
-  // заполним, отошлём хидер:
-  mrpc::protocol::t_msg_header header_reply;
-  n_res = block_socket.read_buf((uint8_t*)&header_reply, sizeof(header_reply));
+  // читаем ответный хидер:
+  mrpc::protocol::t_msg_header header_reply = {};
+  n_res = block_socket.read_buf((uint8_t*)(&header_reply), sizeof(header_reply));
   if(n_res) {
     clog::log_err("error in read_buf() for header");
     return n_res;

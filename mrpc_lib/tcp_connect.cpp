@@ -34,11 +34,13 @@ mrpc::tcp_connect::~tcp_connect()
   logout("in destructor of tcp_connect");
 
 
-  std::lock_guard<std::mutex> lock(m_mutex);
+  std::lock_guard lock(m_mutex);
 
   // пробежимся и "отпустим" все ожидающие задачи
   for(auto& curr : m_map_defer_tasks)
   {
+
+    // некая пустая нагрузка. По идее здесь должен быть код ошибки ожидания
     mrpc::t_payload payload;
     curr.second->set_promise(std::move(payload));
   }
@@ -48,6 +50,7 @@ mrpc::tcp_connect::~tcp_connect()
 
 void mrpc::tcp_connect::set_drv_rp(mrpc::i_driver_rp* ap_drv_rp)
 {
+  std::lock_guard lock(m_mutex);
   mp_drv_rp = ap_drv_rp;
 };
 //---------------------------------------------------------------------------
@@ -92,7 +95,7 @@ void mrpc::tcp_connect::tcp_connect::do_read()
         };
 
         logout("sending request to del drv...");
-        //m_drv_rp_own.request_to_del_drv(this);
+        m_drv_rp_own.request_to_del_drv(this);
 
         return; 
       }
@@ -100,7 +103,7 @@ void mrpc::tcp_connect::tcp_connect::do_read()
 
       if(!a_readed) {
         log_err("zero receied? something strange");
-        //m_drv_rp_own.request_to_del_drv(this);
+        m_drv_rp_own.request_to_del_drv(this);
         return;
       }
 
@@ -157,14 +160,15 @@ void mrpc::tcp_connect::do_write()
 
 
         logout("sending request to del drv...");
-        //m_drv_rp_own.request_to_del_drv(this);
+        
+        m_drv_rp_own.request_to_del_drv(this);
 
         return;
       }
 
       if(!a_written) {
         logout("nothing was written? Strange...");
-        //m_drv_rp_own.request_to_del_drv(this);
+        m_drv_rp_own.request_to_del_drv(this);
         return;
       }
 
@@ -185,7 +189,7 @@ void mrpc::tcp_connect::handle_written(std::size_t a_written)
   { 
      // нужно из под крит секции. т.к. на размер буфера, индекс также смотрят при 
     // добавлении новой задачи на запись
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
     if (m_write_buf_pos + a_written > m_write_buf.size()) {
       log_err("some overrun happened");
       return;
@@ -195,7 +199,7 @@ void mrpc::tcp_connect::handle_written(std::size_t a_written)
 
 
     if(m_write_buf_pos == m_write_buf.size()) {
-      logout("all buff written");
+      logout("all buf written");
 
       // выталкивает то что писали (удаляем)
       m_queue.pop();
@@ -212,6 +216,17 @@ void mrpc::tcp_connect::handle_written(std::size_t a_written)
 //---------------------------------------------------------------------------
 
 
+
+// похожу нужно, иначе падаем при удалении
+void mrpc::tcp_connect::clear_drv_rp()
+{
+  // под мьютексом, т.к. удаляем из дефер буфера
+  std::lock_guard lock(m_mutex);
+  mp_drv_rp = nullptr;
+};
+//---------------------------------------------------------------------------
+
+
 void mrpc::tcp_connect::handle_complete_msg()
 {
   logout("in handle_complete_msg");
@@ -220,6 +235,24 @@ void mrpc::tcp_connect::handle_complete_msg()
  
   // Если это запрос, то по любому отправляем на исполнение "серванту":
   if (m_p_read_obj->m_header.m_is_request) {
+
+    // под крит секцией
+    std::lock_guard lock(m_mutex);
+
+    if(!mp_drv_rp) {
+
+      // вернуть хоть какой-то результат на ту строну:
+      std::vector<uint8_t> vec_tmp;
+      int n_res = put_answer(m_p_read_obj->m_header.m_dw_task_id, std::move(vec_tmp));
+      if (n_res) {
+        clog::log_err("!!! Error in put_answer()");
+        return;
+      }
+
+      clog::log_err("rp already nullptr");
+      return;
+    }
+
     mp_drv_rp->handle_net_request(m_p_read_obj->m_header.m_dw_task_id, 
       m_p_read_obj->m_header.m_dw_func_id, std::move(m_p_read_obj->m_vec_payload));
     return;
@@ -229,7 +262,7 @@ void mrpc::tcp_connect::handle_complete_msg()
 
   {
     // под мьютексом, т.к. удаляем из дефер буфера
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     // Если это ответ, то возможно у нас есть уже отлженная запись и подвешенный на ней клиент. Посмотрим:
     auto iter = m_map_defer_tasks.find(m_p_read_obj->m_header.m_dw_task_id);
@@ -343,7 +376,7 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
 
 
   {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
 
     adw_task_id = m_dwLastTaskID;
@@ -379,7 +412,7 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
 int mrpc::tcp_connect::push_task_answer(uint32_t adw_task_id, std::vector<uint8_t>&& avec_data)
 {
   {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     //todo: заменить на make_unique
     auto rec = std::make_unique<mrpc::t_cmd_record>(false, adw_task_id, -1, std::move(avec_data));
@@ -401,7 +434,7 @@ int mrpc::tcp_connect::push_task_4block(uint32_t adw_func_id, std::vector<uint8_
   std::future<t_payload>& a_future)
 {
   {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
 
     uint32_t dw_task_id = m_dwLastTaskID;
@@ -459,7 +492,9 @@ void mrpc::tcp_connect::check_start_write()
   // копируем заголовок на данные:
   std::memcpy(&m_write_buf[0], &header, sizeof(header));
 
-  std::memcpy(&(m_write_buf[0]) + sizeof(header), &record->m_vec_data[0], record->m_vec_data.size());
+  if(record->m_vec_data.size()) {
+    std::memcpy(&(m_write_buf[0]) + sizeof(header), &record->m_vec_data[0], record->m_vec_data.size());
+  }
 
   // выставляем позицию "записано" в 0:
   m_write_buf_pos = 0;

@@ -127,7 +127,7 @@ void mrpc::t_server::asio_thread_work()
   }
   catch (const std::exception& aexc)
   {
-    clog::log_err(std::string("exception in work exception info: ") + aexc.what());
+    clog::log_err(std::string("exception in asio_thread_work(), exception info: ") + aexc.what());
   }
 }
 //---------------------------------------------------------------------------

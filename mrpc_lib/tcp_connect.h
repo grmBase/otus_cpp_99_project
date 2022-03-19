@@ -43,6 +43,10 @@ class tcp_connect
     // чтобы отслеживать удаление:
     ~tcp_connect();
 
+    // похожу нужно, иначе падаем при удалении
+    void clear_drv_rp();
+
+
     //
     void set_drv_rp(mrpc::i_driver_rp* ap_drv_rp) override;
 
@@ -130,7 +134,8 @@ class tcp_connect
     uint32_t m_dwLastTaskID = {55}; // 55 - чтобы было виднее и проще отлаживать
 
     // для защиты данных буфера
-    mutable std::mutex m_mutex;
+    mutable std::recursive_mutex m_mutex;
+    
 
     std::queue<std::unique_ptr<mrpc::t_cmd_record>> m_queue;
 
