@@ -10,7 +10,7 @@ namespace mrpc
 /*
     Запись о одном запросе/ ответе 
 */
-class t_cmd_record
+struct t_cmd_record
 {
   public:
 
@@ -26,7 +26,7 @@ class t_cmd_record
 
 
 
-  public:
+  // ************ Данные *****************
 
     bool m_is_request;
 

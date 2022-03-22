@@ -8,7 +8,6 @@
 //---------------------------------------------------------------------------
 #include "protocol.h"
 #include "tcp_read_obj.h"
-#include "tcp_read_obj.h"
 #include "defer_rec.h"
 #include "cmd_record.h"   // храним запросы
 
@@ -43,8 +42,8 @@ class tcp_connect
     // чтобы отслеживать удаление:
     ~tcp_connect();
 
-    // похожу нужно, иначе падаем при удалении
-    void clear_drv_rp();
+    // нужно, иначе нормально выгружаться в разных ситуациях
+    void clear_drv_rp() override;
 
 
     //

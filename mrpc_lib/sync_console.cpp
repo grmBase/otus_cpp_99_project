@@ -39,7 +39,7 @@ std::string make_time()
       parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
   #elif defined(__unix)
     snprintf(buf, un_size, "%02d:%02d:%02d.%03d",
-      parts.tm_hour, parts.tm_min, parts.tm_sec, milseconds);
+      parts.tm_hour, parts.tm_min, parts.tm_sec, (int)milseconds);
   #endif
 
 
@@ -50,7 +50,7 @@ std::string make_time()
 
 
 
-void t_sync_console::log_info_inst(const std::string_view& astr_info)
+void t_sync_console::log_info_inst(std::string_view astr_info)
 {
   std::lock_guard lock(m_mutex);
 
@@ -59,7 +59,7 @@ void t_sync_console::log_info_inst(const std::string_view& astr_info)
 //---------------------------------------------------------------------------
 
 
-void t_sync_console::logout_inst(const std::string_view& astr_info)
+void t_sync_console::logout_inst(std::string_view astr_info)
 {
 #ifdef DBG_LOGGING
   log_info_inst(astr_info);
@@ -69,7 +69,7 @@ void t_sync_console::logout_inst(const std::string_view& astr_info)
 
 
 // 
-void t_sync_console::log_err_inst(const std::string_view& astr_info)
+void t_sync_console::log_err_inst(std::string_view astr_info)
 {
 
 #ifdef DBG_LOGGING
@@ -82,7 +82,7 @@ void t_sync_console::log_err_inst(const std::string_view& astr_info)
 
 
 
-void clog::logout(const std::string_view& astr_info)
+void clog::logout(std::string_view astr_info)
 {
 #ifdef DBG_LOGGING
   gp_log->logout_inst(astr_info);
@@ -90,7 +90,7 @@ void clog::logout(const std::string_view& astr_info)
 }
 //---------------------------------------------------------------------------
 
-void clog::log_info(const std::string_view& astr_info)
+void clog::log_info(std::string_view astr_info)
 {
 #ifdef DBG_LOGGING
   gp_log->log_info_inst(astr_info);
@@ -98,7 +98,7 @@ void clog::log_info(const std::string_view& astr_info)
 }
 //---------------------------------------------------------------------------
 
-void clog::log_err(const std::string_view& astr_info)
+void clog::log_err(std::string_view astr_info)
 {
 #ifdef DBG_LOGGING
   gp_log->log_err_inst(astr_info);
@@ -108,7 +108,7 @@ void clog::log_err(const std::string_view& astr_info)
 
 
 // чтобы выводилось всегда - там по заданию нужно в консоль
-void clog::log_info_always(const std::string_view& astr_info)
+void clog::log_info_always(std::string_view astr_info)
 {
   gp_log->log_info_inst(astr_info);
 }

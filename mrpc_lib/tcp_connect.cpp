@@ -384,9 +384,6 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
     m_dwLastTaskID++;
 
 
-    //todo: заменить на make_unique
-    //auto rec = std::unique_ptr<mrpc::t_cmd_record>(
-    //  new mrpc::t_cmd_record(true, adw_task_id, adw_func_id, std::move(avec_data)));
     auto rec = std::make_unique<mrpc::t_cmd_record>(true, adw_task_id, adw_func_id, std::move(avec_data));
 
     m_queue.emplace(std::move(rec));

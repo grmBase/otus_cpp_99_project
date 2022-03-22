@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 #include <iostream>
 //---------------------------------------------------------------------------
-#include "../test/appl.h"
+#include "test/appl.h"
 //---------------------------------------------------------------------------
 #include "include/sconsole/sync_console.h"
 #include "include/mrpc/iocp_block.h"

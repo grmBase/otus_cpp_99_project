@@ -7,11 +7,11 @@
 #include <memory>
 #include <mutex>
 //---------------------------------------------------------------------------
-#include "../include/mrpc/i_server.h"
-#include "../include/mrpc/i_listen_rp.h"
+#include "include/mrpc/i_server.h"
+#include "include/mrpc/i_listen_rp.h"
 //---------------------------------------------------------------------------
-#include "../include/mrpc/i_driver.h"
-#include "../include/mrpc/i_driver_rp_own.h"
+#include "include/mrpc/i_driver.h"
+#include "include/mrpc/i_driver_rp_own.h"
 //---------------------------------------------------------------------------
 #include "tst_custom_drv.h"  // тут храним эти драйвера
 //---------------------------------------------------------------------------

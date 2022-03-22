@@ -16,12 +16,12 @@ extern t_sync_console* gp_log;
 
 namespace clog
 {
-  void logout(const std::string_view& astr_info);
-  void log_info(const std::string_view& astr_info);
-  void log_err(const std::string_view& astr_info);
+  void logout(std::string_view astr_info);
+  void log_info(std::string_view astr_info);
+  void log_err(std::string_view astr_info);
 
   // чтобы выводилось всегда - там по заданию нужно в консоль
-  void log_info_always(const std::string_view& astr_info);
+  void log_info_always(std::string_view astr_info);
 }
 
 
@@ -30,19 +30,17 @@ class t_sync_console
 {
 public:
 
-  void logout_inst(const std::string_view& astr_info);
+  void logout_inst(std::string_view astr_info);
 
-  void log_err_inst(const std::string_view& astr_info);
+  void log_err_inst(std::string_view astr_info);
 
 
 
-  void log_info_inst(const std::string_view& astr_info);
+  void log_info_inst(std::string_view astr_info);
 
 private:
 
   // мьютекс синхронизации std::cout
-  mutable std::mutex m_mutex; // оставил один - иначе cout и cerr в одной консоли смешиваются
-  //mutable std::mutex m_mut_cout;
-  //mutable std::mutex m_mut_cerr;
+  mutable std::mutex m_mutex; // оставил один на всех - иначе cout и cerr в одной консоли смешиваются
 };
 //---------------------------------------------------------------------------

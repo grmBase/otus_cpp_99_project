@@ -30,11 +30,7 @@ mrpc::t_server::t_server(uint16_t a_port, size_t a_num_of_threads,
     m_threads{a_num_of_threads},
     m_listen_rp(a_listen_rp),
     m_drv_rp(a_drv_rp)
-    //m_pool{a_num_of_threads} //пусть будет столько же
 {
-
-  // попробую забросить какое-то задание:
-  //boost::asio::post(m_pool, [] {clog::logout("hello from handler of tast in thread pool");});
 }
 //---------------------------------------------------------------------------
 
@@ -42,7 +38,7 @@ mrpc::t_server::t_server(uint16_t a_port, size_t a_num_of_threads,
 mrpc::t_server::~t_server()
 {
   clog::logout("before join() threads");
-  for (auto& curr : m_threads) {
+  for(auto& curr : m_threads) {
     curr.join();
   };
 
@@ -144,26 +140,21 @@ int mrpc::t_server::client_connect(const std::string& astr_host, const std::stri
   b_tcp::endpoint endpoint = *endpoint_iterator;
 
 
+  std::unique_ptr<b_tcp::socket> sp_socket = std::make_unique<b_tcp::socket>(m_io_context);
 
-  b_tcp::socket* p_socket = new b_tcp::socket(m_io_context);
-
-  p_socket->async_connect(*endpoint_iterator,
-    [this, p_socket](const boost::system::error_code& a_error)
+  sp_socket->async_connect(*endpoint_iterator,
+    [this, sp_socket = std::move(sp_socket)](const boost::system::error_code& a_error)
     {
-
-      // по любому удалим по выходу:
-      std::unique_ptr<b_tcp::socket> hold(p_socket);
-
       if(a_error) {
         clog::log_err("Error after async_connect(). code: " + std::to_string(a_error.value()) + ", transl: " + a_error.message());
         return;
       }
 
       clog::logout("<< connection completed ok. remote endpoint: " +
-        p_socket->remote_endpoint().address().to_string() + ":" +
-        std::to_string(p_socket->remote_endpoint().port()));
+        sp_socket->remote_endpoint().address().to_string() + ":" +
+        std::to_string(sp_socket->remote_endpoint().port()));
 
-      auto p_driver = std::make_shared<tcp_connect>("connect_drv", std::move(*p_socket), *this, m_drv_rp);
+      auto p_driver = std::make_shared<tcp_connect>("connect_drv", std::move(*sp_socket), *this, m_drv_rp);
       m_listen_rp.notify_new_drv_connect(p_driver);
 
     }

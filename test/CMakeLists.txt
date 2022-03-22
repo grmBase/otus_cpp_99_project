@@ -55,7 +55,8 @@ set_target_properties(mrpc_test PROPERTIES
 
 
 target_include_directories(mrpc_test PUBLIC
-${PROJECT_SOURCE_DIR}/./
+  ${PROJECT_SOURCE_DIR}/./
+  ${PROJECT_SOURCE_DIR}/../
 )
 
 
@@ -65,7 +66,7 @@ ${PROJECT_SOURCE_DIR}/./
 #add_executable(test_version test_version.cpp)
 
 target_include_directories(mrpc_test
-    PRIVATE "${CMAKE_BINARY_DIR}"
+  PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
 

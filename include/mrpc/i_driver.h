@@ -14,33 +14,33 @@ class i_driver_rp;
 //---------------------------------------------------------------------------
 
 
-// Интерфейс уведомления о подключении нового драйвера:
+/// Интерфейс уведомления о подключении нового драйвера:
 class i_driver
 {
   public:
 
-    // "пост" инициализация
+    /// "пост" инициализация
     virtual void set_drv_rp(mrpc::i_driver_rp* ap_drv_rp) = 0;
 
     virtual ~i_driver() {};
 
-    // запускаем работу драйвера
+    /// запускаем работу драйвера
     virtual int start() = 0;
 
-    // Забросить какое-то задание на выполнение:
+    /// Забросить какое-то задание на выполнение:
     virtual int put_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, uint32_t& adw_req_id) = 0;
 
-    // Забросить ответ на задание:
+    /// Забросить ответ на задание:
     virtual int put_answer(uint32_t adw_req_id, std::vector<uint8_t>&& a_buf) = 0;
 
 
 
-    // выполнить блокирующий запрос
+    /// выполнить блокирующий запрос
     virtual int exec_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, 
       std::vector<uint8_t>& a_res) = 0;
 
+    /// убираем ссылки на внешний "пользовательский" драйвер
     virtual void clear_drv_rp() = 0;
-
 
 
 };

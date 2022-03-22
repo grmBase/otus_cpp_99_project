@@ -2,6 +2,8 @@
 #pragma once
 //---------------------------------------------------------------------------
 #include <vector>
+#include <cstdint> // uint8_t
+#include <string>
 //---------------------------------------------------------------------------
 
 
@@ -23,7 +25,7 @@ enum class cmd_type : uint8_t
 
 // Макрос, для максимальной упаковки структуры (далее мы на неё делаешь sizeof())
 #ifdef __GNUC__
-#define MRPC_PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
+#define MRPC_PACK( __Declaration__ ) __Declaration__ __attribute__((packed));
 #endif
 
 #ifdef _MSC_VER
@@ -72,7 +74,7 @@ struct t_msg_header
   uint32_t m_dw_func_id = 0x00; // id пользовательской функции. В реальной задаче скорее всего будет строкой
 
   uint32_t m_dw_buf_size = std::numeric_limits<uint32_t>::max(); // размер последующей нагрузки
-};
+}
 )
 
 //---------------------------------------------------------------------------
