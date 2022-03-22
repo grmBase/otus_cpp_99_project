@@ -80,7 +80,7 @@ Inheritance diagram for tst::t_custom_drv:</div>
 <div class="center"><img src="classtst_1_1t__custom__drv__inherit__graph.png" border="0" usemap="#atst_1_1t__custom__drv_inherit__map" alt="Inheritance graph"/></div>
 <map name="atst_1_1t__custom__drv_inherit__map" id="atst_1_1t__custom__drv_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,80,128,107"/>
-<area shape="rect" href="classmrpc_1_1i__driver__rp.html" title=" " alt="" coords="8,5,125,32"/>
+<area shape="rect" href="classmrpc_1_1i__driver__rp.html" title="Интерфейс объекта, который будет обрабатывать сетевые запросы (серванта)" alt="" coords="8,5,125,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -89,7 +89,7 @@ Collaboration diagram for tst::t_custom_drv:</div>
 <div class="center"><img src="classtst_1_1t__custom__drv__coll__graph.png" border="0" usemap="#atst_1_1t__custom__drv_coll__map" alt="Collaboration graph"/></div>
 <map name="atst_1_1t__custom__drv_coll__map" id="atst_1_1t__custom__drv_coll__map">
 <area shape="rect" title=" " alt="" coords="5,80,128,107"/>
-<area shape="rect" href="classmrpc_1_1i__driver__rp.html" title=" " alt="" coords="8,5,125,32"/>
+<area shape="rect" href="classmrpc_1_1i__driver__rp.html" title="Интерфейс объекта, который будет обрабатывать сетевые запросы (серванта)" alt="" coords="8,5,125,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -102,12 +102,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a54432720f80c927fc585caa6492b00bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtst_1_1t__custom__drv.html#a54432720f80c927fc585caa6492b00bf">work</a> ()</td></tr>
 <tr class="separator:a54432720f80c927fc585caa6492b00bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88c9abaa8ec4555b6606e425f3d37ed5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtst_1_1t__custom__drv.html#a88c9abaa8ec4555b6606e425f3d37ed5">handle_net_request</a> (uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</td></tr>
+<tr class="memdesc:a88c9abaa8ec4555b6606e425f3d37ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запрос на отработать новую команду с другой стороны  <a href="classtst_1_1t__custom__drv.html#a88c9abaa8ec4555b6606e425f3d37ed5">More...</a><br /></td></tr>
 <tr class="separator:a88c9abaa8ec4555b6606e425f3d37ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1673263b5920c4d602687d5c455420f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtst_1_1t__custom__drv.html#af1673263b5920c4d602687d5c455420f">handle_net_answer</a> (uint32_t adw_req_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request) override</td></tr>
+<tr class="memdesc:af1673263b5920c4d602687d5c455420f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запрос отрабоать асинхронный ответ  <a href="classtst_1_1t__custom__drv.html#af1673263b5920c4d602687d5c455420f">More...</a><br /></td></tr>
 <tr class="separator:af1673263b5920c4d602687d5c455420f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6775540fd741e97d64911ca05a14a4fd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__driver__rp.html#a6775540fd741e97d64911ca05a14a4fd">handle_net_request</a> (uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_request)=0</td></tr>
+<tr class="memdesc:a6775540fd741e97d64911ca05a14a4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запрос на отработать новую команду с другой стороны  <a href="classmrpc_1_1i__driver__rp.html#a6775540fd741e97d64911ca05a14a4fd">More...</a><br /></td></tr>
 <tr class="separator:a6775540fd741e97d64911ca05a14a4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c2454461f26581bce6013bf304aab9e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__driver__rp.html#a7c2454461f26581bce6013bf304aab9e">handle_net_answer</a> (uint32_t adw_req_id, std::vector&lt; uint8_t &gt; &amp;&amp;a_vec_answer)=0</td></tr>
+<tr class="memdesc:a7c2454461f26581bce6013bf304aab9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запрос отрабоать асинхронный ответ  <a href="classmrpc_1_1i__driver__rp.html#a7c2454461f26581bce6013bf304aab9e">More...</a><br /></td></tr>
 <tr class="separator:a7c2454461f26581bce6013bf304aab9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -182,7 +186,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>a_vec_request</em>&#160;</td>
+          <td class="paramname"><em>a_vec_answer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -196,6 +200,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Запрос отрабоать асинхронный ответ </p>
 
 <p>Implements <a class="el" href="classmrpc_1_1i__driver__rp.html#a7c2454461f26581bce6013bf304aab9e">mrpc::i_driver_rp</a>.</p>
 
@@ -240,6 +246,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Запрос на отработать новую команду с другой стороны </p>
 
 <p>Implements <a class="el" href="classmrpc_1_1i__driver__rp.html#a6775540fd741e97d64911ca05a14a4fd">mrpc::i_driver_rp</a>.</p>
 

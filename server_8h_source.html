@@ -74,94 +74,90 @@ $(function() {
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;boost/asio.hpp&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//#include &lt;boost/asio/thread_pool.hpp&gt; // для организации пула потоков</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;boost/asio/post.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../include/mrpc/i_server.h&quot;</span>   <span class="comment">// наследуемся</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keyword">class </span>i_driver_rp_own;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>};</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">   16</a></span><span class="keyword">using</span> <a class="code hl_typedef" href="iocp__block_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a> = boost::asio::ip::tcp;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="i__server_8h.html">include/mrpc/i_server.h</a>&quot;</span>   <span class="comment">// наследуемся</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keyword">class </span>i_driver_rp_own;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>};</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="server_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">   15</a></span><span class="keyword">using</span> <a class="code hl_typedef" href="iocp__block_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a> = boost::asio::ip::tcp;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classmrpc_1_1t__server.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classmrpc_1_1t__server.html">t_server</a> : <span class="keyword">public</span> <a class="code hl_class" href="classmrpc_1_1i__server.html">mrpc::i_server</a></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classmrpc_1_1t__server.html#ada0b4830291c3ae2c659ff8ef3a7548d">t_server</a>(uint16_t a_port, <span class="keywordtype">size_t</span> a_num_of_threads, </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      <a class="code hl_class" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a>&amp; a_listen_rp, <a class="code hl_class" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a>&amp; a_drv_rp);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="classmrpc_1_1t__server.html#a7a96001499ad034e1f1c727f63f6598f">~t_server</a>();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// то что вызывют нитки когда крутятся</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">asio_thread_work</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classmrpc_1_1t__server.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="classmrpc_1_1t__server.html">t_server</a> : <span class="keyword">public</span> <a class="code hl_class" href="classmrpc_1_1i__server.html">mrpc::i_server</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_function" href="classmrpc_1_1t__server.html#ada0b4830291c3ae2c659ff8ef3a7548d">t_server</a>(uint16_t a_port, <span class="keywordtype">size_t</span> a_num_of_threads, </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      <a class="code hl_class" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a>&amp; a_listen_rp, <a class="code hl_class" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a>&amp; a_drv_rp);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classmrpc_1_1t__server.html#a7a96001499ad034e1f1c727f63f6598f">~t_server</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// то что вызывют нитки когда крутятся</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">asio_thread_work</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">start_threads</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// запускаем слушание порта:</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">start_listen</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">stop</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">start_threads</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">// запускаем слушание порта:</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">start_listen</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">stop</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// коннектимся куда-то как клиент:</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">client_connect</a>(<span class="keyword">const</span> std::string&amp; astr_host, <span class="keyword">const</span> std::string&amp; astr_port) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// </span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">//boost::asio::thread_pool&amp; get_pool();</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> do_accept();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment">// коннектимся куда-то как клиент:</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">client_connect</a>(<span class="keyword">const</span> std::string&amp; astr_host, <span class="keyword">const</span> std::string&amp; astr_port) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// </span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">//boost::asio::thread_pool&amp; get_pool();</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> do_accept();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">// *********** данные ***************</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    uint16_t m_port;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// основной объект asio</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    boost::asio::io_context m_io_context;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// слушатель входящих запросов tcp</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    b_tcp::acceptor m_acceptor;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="comment">// здесь храним список рабочих нитей</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    std::vector&lt;std::thread&gt; m_threads;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// *********** данные ***************</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    uint16_t m_port;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// основной объект asio</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    boost::asio::io_context m_io_context;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// слушатель входящих запросов tcp</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    b_tcp::acceptor m_acceptor;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">// здесь храним список рабочих нитей</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    std::vector&lt;std::thread&gt; m_threads;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// пул потоков &quot;медленных, пользовательских&quot; функция</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">//boost::asio::thread_pool m_pool;</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// приёмная часть кто слушает новые присоединившиеся драйвера:</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_class" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a>&amp; m_listen_rp;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="comment">// приёмная часть, кто слушает запросы из сети драйверов и запросы на </span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">// удаление драйверов</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_class" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a>&amp; m_drv_rp;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// приёмная часть кто слушает новые присоединившиеся драйвера:</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_class" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a>&amp; m_listen_rp;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// приёмная часть, кто слушает запросы из сети драйверов и запросы на </span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">// удаление драйверов</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a>&amp; m_drv_rp;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}; <span class="comment">// mrpc</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}; <span class="comment">// mrpc</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="ttc" id="aclassmrpc_1_1i__driver__rp__own_html"><div class="ttname"><a href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a></div><div class="ttdef"><b>Definition:</b> i_driver_rp_own.h:12</div></div>
-<div class="ttc" id="aclassmrpc_1_1i__listen__rp_html"><div class="ttname"><a href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a></div><div class="ttdef"><b>Definition:</b> i_listen_rp.h:16</div></div>
-<div class="ttc" id="aclassmrpc_1_1i__server_html"><div class="ttname"><a href="classmrpc_1_1i__server.html">mrpc::i_server</a></div><div class="ttdef"><b>Definition:</b> i_server.h:19</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html"><div class="ttname"><a href="classmrpc_1_1t__server.html">mrpc::t_server</a></div><div class="ttdef"><b>Definition:</b> server.h:24</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a1aeadf60f95ff918feb81f839dccc1fd"><div class="ttname"><a href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">mrpc::t_server::client_connect</a></div><div class="ttdeci">int client_connect(const std::string &amp;astr_host, const std::string &amp;astr_port) override</div><div class="ttdef"><b>Definition:</b> server.cpp:137</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a2116ba2fb01d60444aceec86d1ecba7d"><div class="ttname"><a href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">mrpc::t_server::start_threads</a></div><div class="ttdeci">int start_threads() override</div><div class="ttdef"><b>Definition:</b> server.cpp:88</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a768d5627065f2c464f52eba3d3cd5e5c"><div class="ttname"><a href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">mrpc::t_server::asio_thread_work</a></div><div class="ttdeci">void asio_thread_work()</div><div class="ttdef"><b>Definition:</b> server.cpp:114</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_a7a96001499ad034e1f1c727f63f6598f"><div class="ttname"><a href="classmrpc_1_1t__server.html#a7a96001499ad034e1f1c727f63f6598f">mrpc::t_server::~t_server</a></div><div class="ttdeci">~t_server()</div><div class="ttdef"><b>Definition:</b> server.cpp:42</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_ad3eaf39b797278a791735e2fbc040b5f"><div class="ttname"><a href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">mrpc::t_server::stop</a></div><div class="ttdeci">int stop() override</div><div class="ttdef"><b>Definition:</b> server.cpp:104</div></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="ttc" id="aclassmrpc_1_1i__driver__rp__own_html"><div class="ttname"><a href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a></div><div class="ttdoc">Интерфейс &quot;владельца&quot; драйверов</div><div class="ttdef"><b>Definition:</b> i_driver_rp_own.h:12</div></div>
+<div class="ttc" id="aclassmrpc_1_1i__listen__rp_html"><div class="ttname"><a href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a></div><div class="ttdoc">Интерфейс уведомления о подключении нового драйвера:</div><div class="ttdef"><b>Definition:</b> i_listen_rp.h:16</div></div>
+<div class="ttc" id="aclassmrpc_1_1i__server_html"><div class="ttname"><a href="classmrpc_1_1i__server.html">mrpc::i_server</a></div><div class="ttdef"><b>Definition:</b> i_server.h:22</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html"><div class="ttname"><a href="classmrpc_1_1t__server.html">mrpc::t_server</a></div><div class="ttdef"><b>Definition:</b> server.h:23</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a1aeadf60f95ff918feb81f839dccc1fd"><div class="ttname"><a href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">mrpc::t_server::client_connect</a></div><div class="ttdeci">int client_connect(const std::string &amp;astr_host, const std::string &amp;astr_port) override</div><div class="ttdoc">коннектимся как клиент:</div><div class="ttdef"><b>Definition:</b> server.cpp:133</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a2116ba2fb01d60444aceec86d1ecba7d"><div class="ttname"><a href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">mrpc::t_server::start_threads</a></div><div class="ttdeci">int start_threads() override</div><div class="ttdoc">запускаем нити</div><div class="ttdef"><b>Definition:</b> server.cpp:84</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a768d5627065f2c464f52eba3d3cd5e5c"><div class="ttname"><a href="classmrpc_1_1t__server.html#a768d5627065f2c464f52eba3d3cd5e5c">mrpc::t_server::asio_thread_work</a></div><div class="ttdeci">void asio_thread_work()</div><div class="ttdef"><b>Definition:</b> server.cpp:110</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_a7a96001499ad034e1f1c727f63f6598f"><div class="ttname"><a href="classmrpc_1_1t__server.html#a7a96001499ad034e1f1c727f63f6598f">mrpc::t_server::~t_server</a></div><div class="ttdeci">~t_server()</div><div class="ttdef"><b>Definition:</b> server.cpp:38</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_ad3eaf39b797278a791735e2fbc040b5f"><div class="ttname"><a href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">mrpc::t_server::stop</a></div><div class="ttdeci">int stop() override</div><div class="ttdoc">останавливает нитки контекста</div><div class="ttdef"><b>Definition:</b> server.cpp:100</div></div>
 <div class="ttc" id="aclassmrpc_1_1t__server_html_ada0b4830291c3ae2c659ff8ef3a7548d"><div class="ttname"><a href="classmrpc_1_1t__server.html#ada0b4830291c3ae2c659ff8ef3a7548d">mrpc::t_server::t_server</a></div><div class="ttdeci">t_server(uint16_t a_port, size_t a_num_of_threads, mrpc::i_listen_rp &amp;a_listen_rp, mrpc::i_driver_rp_own &amp;a_drv_rp)</div><div class="ttdef"><b>Definition:</b> server.cpp:27</div></div>
-<div class="ttc" id="aclassmrpc_1_1t__server_html_ae5fdff42c34c2459ed95806a73790ae2"><div class="ttname"><a href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">mrpc::t_server::start_listen</a></div><div class="ttdeci">int start_listen() override</div><div class="ttdef"><b>Definition:</b> server.cpp:54</div></div>
+<div class="ttc" id="aclassmrpc_1_1t__server_html_ae5fdff42c34c2459ed95806a73790ae2"><div class="ttname"><a href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">mrpc::t_server::start_listen</a></div><div class="ttdeci">int start_listen() override</div><div class="ttdoc">запускаем прослушивание</div><div class="ttdef"><b>Definition:</b> server.cpp:50</div></div>
+<div class="ttc" id="ai__server_8h_html"><div class="ttname"><a href="i__server_8h.html">i_server.h</a></div></div>
 <div class="ttc" id="aiocp__block_8h_html_a829b9050b5b45759db9fe3c58d9fcf4b"><div class="ttname"><a href="iocp__block_8h.html#a829b9050b5b45759db9fe3c58d9fcf4b">b_tcp</a></div><div class="ttdeci">boost::asio::ip::tcp b_tcp</div><div class="ttdef"><b>Definition:</b> iocp_block.h:6</div></div>
 <div class="ttc" id="anamespacemrpc_html"><div class="ttname"><a href="namespacemrpc.html">mrpc</a></div><div class="ttdef"><b>Definition:</b> i_driver.h:9</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -72,7 +72,7 @@ $(function() {
 <a href="tcp__read__obj_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../include/sconsole/sync_console.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="sync__console_8h.html">include/sconsole/sync_console.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
@@ -109,21 +109,21 @@ $(function() {
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      <a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a> += a_readed;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <a class="code hl_function" href="namespaceclog.html#aeb88151a09bef60fa5059e4c83d978f0">clog::logout</a>(<span class="stringliteral">&quot;in handle_readed (header). readed: &quot;</span> + </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <a class="code hl_function" href="namespaceclog.html#a80b28f9a78605537449b44d9fffb51b0">clog::logout</a>(<span class="stringliteral">&quot;in handle_readed (header). readed: &quot;</span> + </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::to_string(a_readed) + <span class="stringliteral">&quot;, total: &quot;</span> + std::to_string(<a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a>));</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      <span class="comment">// ошибка?</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keywordflow">if</span>(<a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a> &gt; <span class="keyword">sizeof</span>(t_msg_header)) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_function" href="namespaceclog.html#af0a88b8a173986dfc4f50539a0dfc987">clog::log_err</a>(<span class="stringliteral">&quot;somehow overrun happened&quot;</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_function" href="namespaceclog.html#adfe968d503c878c54a67a78b30d22388">clog::log_err</a>(<span class="stringliteral">&quot;somehow overrun happened&quot;</span>);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      }</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">if</span>(<a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a> == <span class="keyword">sizeof</span>(t_msg_header)) {</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_function" href="namespaceclog.html#aeb88151a09bef60fa5059e4c83d978f0">clog::logout</a>(<span class="stringliteral">&quot;header readed&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_function" href="namespaceclog.html#a80b28f9a78605537449b44d9fffb51b0">clog::logout</a>(<span class="stringliteral">&quot;header readed&quot;</span>);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        uint32_t payload_size = <a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a2e625c591deba9c17efa80a6fa6c1385">m_header</a>.m_dw_buf_size;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="namespaceclog.html#aeb88151a09bef60fa5059e4c83d978f0">clog::logout</a>(<span class="stringliteral">&quot;payload size: &quot;</span> + std::to_string(payload_size));</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="namespaceclog.html#a80b28f9a78605537449b44d9fffb51b0">clog::logout</a>(<span class="stringliteral">&quot;payload size: &quot;</span> + std::to_string(payload_size));</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="comment">// направляем на чтение нагрузки:</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a6ec0e6e701937eeb5ded89ee5c2ea7e5">m_vec_payload</a>.resize(payload_size);</div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="comment">// смещаемся:</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a> += a_readed;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_function" href="namespaceclog.html#aeb88151a09bef60fa5059e4c83d978f0">clog::logout</a>(<span class="stringliteral">&quot;in handle_readed (payload). readed: &quot;</span> +</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_function" href="namespaceclog.html#a80b28f9a78605537449b44d9fffb51b0">clog::logout</a>(<span class="stringliteral">&quot;in handle_readed (payload). readed: &quot;</span> +</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      std::to_string(a_readed) + <span class="stringliteral">&quot;, total: &quot;</span> + std::to_string(<a class="code hl_variable" href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">m_index</a>));</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
@@ -192,8 +192,8 @@ $(function() {
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>} <span class="comment">// protocol</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>} <span class="comment">// mrpc</span></div>
-<div class="ttc" id="anamespaceclog_html_aeb88151a09bef60fa5059e4c83d978f0"><div class="ttname"><a href="namespaceclog.html#aeb88151a09bef60fa5059e4c83d978f0">clog::logout</a></div><div class="ttdeci">void logout(const std::string_view &amp;astr_info)</div><div class="ttdef"><b>Definition:</b> sync_console.cpp:85</div></div>
-<div class="ttc" id="anamespaceclog_html_af0a88b8a173986dfc4f50539a0dfc987"><div class="ttname"><a href="namespaceclog.html#af0a88b8a173986dfc4f50539a0dfc987">clog::log_err</a></div><div class="ttdeci">void log_err(const std::string_view &amp;astr_info)</div><div class="ttdef"><b>Definition:</b> sync_console.cpp:101</div></div>
+<div class="ttc" id="anamespaceclog_html_a80b28f9a78605537449b44d9fffb51b0"><div class="ttname"><a href="namespaceclog.html#a80b28f9a78605537449b44d9fffb51b0">clog::logout</a></div><div class="ttdeci">void logout(std::string_view astr_info)</div><div class="ttdef"><b>Definition:</b> sync_console.cpp:85</div></div>
+<div class="ttc" id="anamespaceclog_html_adfe968d503c878c54a67a78b30d22388"><div class="ttname"><a href="namespaceclog.html#adfe968d503c878c54a67a78b30d22388">clog::log_err</a></div><div class="ttdeci">void log_err(std::string_view astr_info)</div><div class="ttdef"><b>Definition:</b> sync_console.cpp:101</div></div>
 <div class="ttc" id="anamespacemrpc_html"><div class="ttname"><a href="namespacemrpc.html">mrpc</a></div><div class="ttdef"><b>Definition:</b> i_driver.h:9</div></div>
 <div class="ttc" id="astructmrpc_1_1protocol_1_1t__read__obj_html"><div class="ttname"><a href="structmrpc_1_1protocol_1_1t__read__obj.html">mrpc::protocol::t_read_obj</a></div><div class="ttdef"><b>Definition:</b> tcp_read_obj.h:17</div></div>
 <div class="ttc" id="astructmrpc_1_1protocol_1_1t__read__obj_html_a05a5e8cf8c1d9ae2290a1678e06719bc"><div class="ttname"><a href="structmrpc_1_1protocol_1_1t__read__obj.html#a05a5e8cf8c1d9ae2290a1678e06719bc">mrpc::protocol::t_read_obj::m_index</a></div><div class="ttdeci">size_t m_index</div><div class="ttdef"><b>Definition:</b> tcp_read_obj.h:117</div></div>
@@ -204,6 +204,7 @@ $(function() {
 <div class="ttc" id="astructmrpc_1_1protocol_1_1t__read__obj_html_a85fe2d5d93da887a9f29e535899d360d"><div class="ttname"><a href="structmrpc_1_1protocol_1_1t__read__obj.html#a85fe2d5d93da887a9f29e535899d360d">mrpc::protocol::t_read_obj::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> tcp_read_obj.h:98</div></div>
 <div class="ttc" id="astructmrpc_1_1protocol_1_1t__read__obj_html_ab9f3eb762db7043645ebf3eb8fde1e48"><div class="ttname"><a href="structmrpc_1_1protocol_1_1t__read__obj.html#ab9f3eb762db7043645ebf3eb8fde1e48">mrpc::protocol::t_read_obj::handle_readed</a></div><div class="ttdeci">void handle_readed(size_t a_readed)</div><div class="ttdef"><b>Definition:</b> tcp_read_obj.h:32</div></div>
 <div class="ttc" id="astructmrpc_1_1protocol_1_1t__read__obj_html_ada93820e0de2f0df0e0efdf638892d66"><div class="ttname"><a href="structmrpc_1_1protocol_1_1t__read__obj.html#ada93820e0de2f0df0e0efdf638892d66">mrpc::protocol::t_read_obj::m_read_header</a></div><div class="ttdeci">bool m_read_header</div><div class="ttdef"><b>Definition:</b> tcp_read_obj.h:107</div></div>
+<div class="ttc" id="async__console_8h_html"><div class="ttname"><a href="sync__console_8h.html">sync_console.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

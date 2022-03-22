@@ -73,141 +73,143 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cstdint&gt;</span> <span class="comment">// uint8_t</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a> {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html">   10</a></span><span class="keyword">namespace </span>protocol {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemrpc.html">mrpc</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html">   12</a></span><span class="keyword">namespace </span>protocol {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Тип команды &quot;внутренняя&quot; типа keepalive или обычная &quot;пользовательская&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">   15</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> : uint8_t</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">undefined</a> = 0xff,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">custom</a> = 0,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150">keep_alive</a> = 1,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Макрос, для максимальной упаковки структуры (далее мы на неё делаешь sizeof())</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#ifdef __GNUC__</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define MRPC_PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define MRPC_PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Тип команды &quot;внутренняя&quot; типа keepalive или обычная &quot;пользовательская&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">   17</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> : uint8_t</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">undefined</a> = 0xff,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">custom</a> = 0,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150">keep_alive</a> = 1,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// Макрос, для максимальной упаковки структуры (далее мы на неё делаешь sizeof())</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifdef __GNUC__</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define MRPC_PACK( __Declaration__ ) __Declaration__ __attribute__((packed));</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define MRPC_PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// Значение первого байта в посылке. Константа, для проверки, что это &quot;наш&quot; клиент</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">   36</a></span><span class="keyword">const</span> uint8_t <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a> = 0x31;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// Значение первого байта в посылке. Константа, для проверки, что это &quot;наш&quot; клиент</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">   38</a></span><span class="keyword">const</span> uint8_t <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a> = 0x31;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// Структура заголовка сообщения</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a6a50be90cde27a1cc156d73272b0ec44">   42</a></span><a class="code hl_function" href="namespacemrpc_1_1protocol.html#a6a50be90cde27a1cc156d73272b0ec44">MRPC_PACK</a>(</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">struct</span> t_msg_header</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="comment">// создаём &quot;пользовательский&quot; хидер</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">static</span> t_msg_header create_custom_request(<span class="keywordtype">bool</span> af_is_request, uint32_t adw_req_id, </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    uint32_t adw_func_id, uint32_t adw_payload_size)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    t_msg_header result;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    result.m_b_cmd_id = <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">cmd_type::custom</a>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    result.m_is_request = af_is_request;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    result.m_dw_task_id = adw_req_id;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    result.m_dw_func_id = adw_func_id;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    result.m_dw_buf_size = adw_payload_size;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  };</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  uint8_t m_b_sign = <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a>;    <span class="comment">// просто определённое значение</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  uint16_t m_w_sequence = 0x32;  <span class="comment">// пока не используется</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  uint8_t m_b_reserved = 0x33;   <span class="comment">// пока не используется</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">bool</span> m_is_request = <span class="keyword">true</span>;      <span class="comment">// флаг если ли посылка запрос или ответ</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> m_b_cmd_id = <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">cmd_type::undefined</a>;    <span class="comment">// тип команды если это запрос и -1 если это ответ</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  uint32_t m_dw_task_id = std::numeric_limits&lt;uint32_t&gt;::max();  <span class="comment">// ID запроса</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  uint32_t m_dw_func_id = 0x00; <span class="comment">// id пользовательской функции. В реальной задаче скорее всего будет строкой</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">// Структура заголовка сообщения</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="namespacemrpc_1_1protocol.html#a38609902f25e69731248fccccebe2a08">   44</a></span><a class="code hl_function" href="namespacemrpc_1_1protocol.html#a38609902f25e69731248fccccebe2a08">MRPC_PACK</a>(</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">struct</span> t_msg_header</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="comment">// создаём &quot;пользовательский&quot; хидер</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">static</span> t_msg_header create_custom_request(<span class="keywordtype">bool</span> af_is_request, uint32_t adw_req_id, </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    uint32_t adw_func_id, uint32_t adw_payload_size)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    t_msg_header result;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    result.m_b_cmd_id = <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">cmd_type::custom</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    result.m_is_request = af_is_request;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    result.m_dw_task_id = adw_req_id;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    result.m_dw_func_id = adw_func_id;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    result.m_dw_buf_size = adw_payload_size;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  };</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  uint8_t m_b_sign = <a class="code hl_variable" href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">c_bSign</a>;    <span class="comment">// просто определённое значение</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  uint16_t m_w_sequence = 0x32;  <span class="comment">// пока не используется</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  uint8_t m_b_reserved = 0x33;   <span class="comment">// пока не используется</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">bool</span> m_is_request = <span class="keyword">true</span>;      <span class="comment">// флаг если ли посылка запрос или ответ</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> m_b_cmd_id = <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">cmd_type::undefined</a>;    <span class="comment">// тип команды если это запрос и -1 если это ответ</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  uint32_t m_dw_task_id = std::numeric_limits&lt;uint32_t&gt;::max();  <span class="comment">// ID запроса</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  uint32_t m_dw_buf_size = std::numeric_limits&lt;uint32_t&gt;::max(); <span class="comment">// размер последующей нагрузки</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>};</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  uint32_t m_dw_func_id = 0x00; <span class="comment">// id пользовательской функции. В реальной задаче скорее всего будет строкой</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  uint32_t m_dw_buf_size = std::numeric_limits&lt;uint32_t&gt;::max(); <span class="comment">// размер последующей нагрузки</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>)</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">// Сериализуем. А может и не надо так...</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">// std::vector&lt;uint8_t&gt; serialize_custom_msg(bool af_is_request, const std::vector&lt;uint8_t&gt;&amp; a_custom_data);</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">inline</span> <span class="keyword">static</span> std::string print_cmd_type(<a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> a_cmd_type)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>{</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordflow">switch</span>(a_cmd_type)</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">cmd_type::undefined</a>:</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;undefined&quot;</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">//break;</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">cmd_type::custom</a>:</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;custom&quot;</span>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">//break;</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150">cmd_type::keep_alive</a>:</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;keep_alive&quot;</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">//break;</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;! should not be there !&gt;&quot;</span>;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="comment">//break;</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>}</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">inline</span> <span class="keyword">static</span> std::string print_header(<span class="keyword">const</span> t_msg_header&amp; a_header)</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>{</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  std::string str_info;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  str_info = <span class="stringliteral">&quot;cmdtype: &quot;</span> + print_cmd_type(a_header.m_b_cmd_id);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">// Сериализуем. А может и не надо так...</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">// std::vector&lt;uint8_t&gt; serialize_custom_msg(bool af_is_request, const std::vector&lt;uint8_t&gt;&amp; a_custom_data);</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">inline</span> <span class="keyword">static</span> std::string print_cmd_type(<a class="code hl_enumeration" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">cmd_type</a> a_cmd_type)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordflow">switch</span>(a_cmd_type)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">cmd_type::undefined</a>:</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;undefined&quot;</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">//break;</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">cmd_type::custom</a>:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;custom&quot;</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">//break;</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150">cmd_type::keep_alive</a>:</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;keep_alive&quot;</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="comment">//break;</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;! should not be there !&gt;&quot;</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">//break;</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">inline</span> <span class="keyword">static</span> std::string print_header(<span class="keyword">const</span> t_msg_header&amp; a_header)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>{</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  std::string str_info;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordflow">if</span>(a_header.m_is_request) {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    str_info += <span class="stringliteral">&quot;, it is command, task_id: &quot;</span> + std::to_string(a_header.m_dw_task_id);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    str_info += <span class="stringliteral">&quot;, it is reply, task_id: &quot;</span> + std::to_string(a_header.m_dw_task_id);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  };</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordflow">if</span>(a_header.m_is_request) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    str_info += <span class="stringliteral">&quot;, func_id: &quot;</span> + std::to_string(a_header.m_dw_func_id);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    assert(a_header.m_dw_func_id == -1); <span class="comment">// в ответе имя функции не передаём</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keywordflow">return</span> str_info;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>} <span class="comment">// protocol</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>} <span class="comment">// mrpc</span></div>
-<div class="ttc" id="anamespacemrpc_1_1protocol_html_a41e964c4042ef64d140b128e23d2692b"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">mrpc::protocol::c_bSign</a></div><div class="ttdeci">const uint8_t c_bSign</div><div class="ttdef"><b>Definition:</b> protocol.h:36</div></div>
-<div class="ttc" id="anamespacemrpc_1_1protocol_html_a6a50be90cde27a1cc156d73272b0ec44"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a6a50be90cde27a1cc156d73272b0ec44">mrpc::protocol::MRPC_PACK</a></div><div class="ttdeci">MRPC_PACK(struct t_msg_header { static t_msg_header create_custom_request(bool af_is_request, uint32_t adw_req_id, uint32_t adw_func_id, uint32_t adw_payload_size) { t_msg_header result;result.m_b_cmd_id=cmd_type::custom;result.m_is_request=af_is_request;result.m_dw_task_id=adw_req_id;result.m_dw_func_id=adw_func_id;result.m_dw_buf_size=adw_payload_size;return result;};uint8_t m_b_sign=c_bSign;uint16_t m_w_sequence=0x32;uint8_t m_b_reserved=0x33;bool m_is_request=true;cmd_type m_b_cmd_id=cmd_type::undefined;uint32_t m_dw_task_id=std::numeric_limits&lt; uint32_t &gt;::max();uint32_t m_dw_func_id=0x00;uint32_t m_dw_buf_size=std::numeric_limits&lt; uint32_t &gt;::max();};) inline static std</div><div class="ttdef"><b>Definition:</b> protocol.h:42</div></div>
-<div class="ttc" id="anamespacemrpc_1_1protocol_html_a8c327566ff2965ded86cb56f9774f55b"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a></div><div class="ttdeci">cmd_type</div><div class="ttdef"><b>Definition:</b> protocol.h:16</div></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  str_info = <span class="stringliteral">&quot;cmdtype: &quot;</span> + print_cmd_type(a_header.m_b_cmd_id);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordflow">if</span>(a_header.m_is_request) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    str_info += <span class="stringliteral">&quot;, it is command, task_id: &quot;</span> + std::to_string(a_header.m_dw_task_id);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    str_info += <span class="stringliteral">&quot;, it is reply, task_id: &quot;</span> + std::to_string(a_header.m_dw_task_id);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  };</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordflow">if</span>(a_header.m_is_request) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    str_info += <span class="stringliteral">&quot;, func_id: &quot;</span> + std::to_string(a_header.m_dw_func_id);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    assert(a_header.m_dw_func_id == -1); <span class="comment">// в ответе имя функции не передаём</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordflow">return</span> str_info;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>};</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>} <span class="comment">// protocol</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>} <span class="comment">// mrpc</span></div>
+<div class="ttc" id="anamespacemrpc_1_1protocol_html_a38609902f25e69731248fccccebe2a08"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a38609902f25e69731248fccccebe2a08">mrpc::protocol::MRPC_PACK</a></div><div class="ttdeci">MRPC_PACK(struct t_msg_header { static t_msg_header create_custom_request(bool af_is_request, uint32_t adw_req_id, uint32_t adw_func_id, uint32_t adw_payload_size) { t_msg_header result;result.m_b_cmd_id=cmd_type::custom;result.m_is_request=af_is_request;result.m_dw_task_id=adw_req_id;result.m_dw_func_id=adw_func_id;result.m_dw_buf_size=adw_payload_size;return result;};uint8_t m_b_sign=c_bSign;uint16_t m_w_sequence=0x32;uint8_t m_b_reserved=0x33;bool m_is_request=true;cmd_type m_b_cmd_id=cmd_type::undefined;uint32_t m_dw_task_id=std::numeric_limits&lt; uint32_t &gt;::max();uint32_t m_dw_func_id=0x00;uint32_t m_dw_buf_size=std::numeric_limits&lt; uint32_t &gt;::max();}) inline static std</div><div class="ttdef"><b>Definition:</b> protocol.h:44</div></div>
+<div class="ttc" id="anamespacemrpc_1_1protocol_html_a41e964c4042ef64d140b128e23d2692b"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a41e964c4042ef64d140b128e23d2692b">mrpc::protocol::c_bSign</a></div><div class="ttdeci">const uint8_t c_bSign</div><div class="ttdef"><b>Definition:</b> protocol.h:38</div></div>
+<div class="ttc" id="anamespacemrpc_1_1protocol_html_a8c327566ff2965ded86cb56f9774f55b"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a></div><div class="ttdeci">cmd_type</div><div class="ttdef"><b>Definition:</b> protocol.h:18</div></div>
 <div class="ttc" id="anamespacemrpc_1_1protocol_html_a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba5e543256c480ac577d30f76f9120eb74">mrpc::protocol::cmd_type::undefined</a></div><div class="ttdeci">@ undefined</div></div>
 <div class="ttc" id="anamespacemrpc_1_1protocol_html_a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55ba8b9035807842a4e4dbe009f3f1478127">mrpc::protocol::cmd_type::custom</a></div><div class="ttdeci">@ custom</div></div>
 <div class="ttc" id="anamespacemrpc_1_1protocol_html_a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150"><div class="ttname"><a href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55bac0a7c9828caaec18a9ab9f562e953150">mrpc::protocol::cmd_type::keep_alive</a></div><div class="ttdeci">@ keep_alive</div></div>

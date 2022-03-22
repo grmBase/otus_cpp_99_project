@@ -90,20 +90,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4649eca47e46d89158d5ba79b33ec5a8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a4649eca47e46d89158d5ba79b33ec5a8">~i_server</a> ()</td></tr>
 <tr class="separator:a4649eca47e46d89158d5ba79b33ec5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b256bd493542383966f8248e87c22d5"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a5b256bd493542383966f8248e87c22d5">start_threads</a> ()=0</td></tr>
+<tr class="memdesc:a5b256bd493542383966f8248e87c22d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">запускаем нити  <a href="classmrpc_1_1i__server.html#a5b256bd493542383966f8248e87c22d5">More...</a><br /></td></tr>
 <tr class="separator:a5b256bd493542383966f8248e87c22d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c14bec4df591c54c4fe37c8960421a0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0">start_listen</a> ()=0</td></tr>
+<tr class="memdesc:a4c14bec4df591c54c4fe37c8960421a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">запускаем прослушивание  <a href="classmrpc_1_1i__server.html#a4c14bec4df591c54c4fe37c8960421a0">More...</a><br /></td></tr>
 <tr class="separator:a4c14bec4df591c54c4fe37c8960421a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc2201079104a626459a403c64663a53"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#afc2201079104a626459a403c64663a53">client_connect</a> (const std::string &amp;astr_host, const std::string &amp;astr_port)=0</td></tr>
+<tr class="memdesc:afc2201079104a626459a403c64663a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">коннектимся как клиент:  <a href="classmrpc_1_1i__server.html#afc2201079104a626459a403c64663a53">More...</a><br /></td></tr>
 <tr class="separator:afc2201079104a626459a403c64663a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6373152f2989814ad451c04b8ef68c5b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b">stop</a> ()=0</td></tr>
+<tr class="memdesc:a6373152f2989814ad451c04b8ef68c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">останавливает нитки контекста  <a href="classmrpc_1_1i__server.html#a6373152f2989814ad451c04b8ef68c5b">More...</a><br /></td></tr>
 <tr class="separator:a6373152f2989814ad451c04b8ef68c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classmrpc_1_1i__server.html">i_server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#ac27456bb7e3d43cba8f2f44b52bdd1fe">create</a> (uint16_t aun_port, unsigned int aun_num_of_threads, <a class="el" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a> &amp;a_listener, <a class="el" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a> &amp;a_drv_rp)</td></tr>
+<tr class="memdesc:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция конструирующая класс:  <a href="classmrpc_1_1i__server.html#ac27456bb7e3d43cba8f2f44b52bdd1fe">More...</a><br /></td></tr>
 <tr class="separator:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Класс "обёртка" вокруг boost::asio ядра, с функциями запуска прослушки или коннекта к другому серверу </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4649eca47e46d89158d5ba79b33ec5a8" name="a4649eca47e46d89158d5ba79b33ec5a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4649eca47e46d89158d5ba79b33ec5a8">&#9670;&nbsp;</a></span>~i_server()</h2>
 
@@ -164,6 +171,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>коннектимся как клиент: </p>
+
 <p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#a1aeadf60f95ff918feb81f839dccc1fd">mrpc::t_server</a>.</p>
 
 </div>
@@ -214,6 +223,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Функция конструирующая класс: </p>
+
 </div>
 </div>
 <a id="a4c14bec4df591c54c4fe37c8960421a0" name="a4c14bec4df591c54c4fe37c8960421a0"></a>
@@ -238,6 +249,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>запускаем прослушивание </p>
 
 <p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#ae5fdff42c34c2459ed95806a73790ae2">mrpc::t_server</a>.</p>
 
@@ -266,6 +279,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>запускаем нити </p>
+
 <p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#a2116ba2fb01d60444aceec86d1ecba7d">mrpc::t_server</a>.</p>
 
 </div>
@@ -292,6 +307,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>останавливает нитки контекста </p>
 
 <p>Implemented in <a class="el" href="classmrpc_1_1t__server.html#ad3eaf39b797278a791735e2fbc040b5f">mrpc::t_server</a>.</p>
 

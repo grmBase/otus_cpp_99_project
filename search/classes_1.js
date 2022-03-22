@@ -1,7 +1,7 @@
 var searchData=
 [
   ['t_5fappl_0',['t_appl',['../classt__appl.html',1,'']]],
-  ['t_5fcmd_5frecord_1',['t_cmd_record',['../classmrpc_1_1t__cmd__record.html',1,'mrpc']]],
+  ['t_5fcmd_5frecord_1',['t_cmd_record',['../structmrpc_1_1t__cmd__record.html',1,'mrpc']]],
   ['t_5fcustom_5fdrv_2',['t_custom_drv',['../classtst_1_1t__custom__drv.html',1,'tst']]],
   ['t_5fdefer_5frec_3',['t_defer_rec',['../classmrpc_1_1t__defer__rec.html',1,'mrpc']]],
   ['t_5fiocp_5fblock_4',['t_iocp_block',['../classt__iocp__block.html',1,'']]],

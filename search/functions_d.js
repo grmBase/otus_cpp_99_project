@@ -1,7 +1,7 @@
 var searchData=
 [
   ['t_5fappl_0',['t_appl',['../classt__appl.html#ab581c92082feb9bd18013303631b4c7f',1,'t_appl']]],
-  ['t_5fcmd_5frecord_1',['t_cmd_record',['../classmrpc_1_1t__cmd__record.html#a56177d8237e59475e8728a3980c0291f',1,'mrpc::t_cmd_record']]],
+  ['t_5fcmd_5frecord_1',['t_cmd_record',['../structmrpc_1_1t__cmd__record.html#a56177d8237e59475e8728a3980c0291f',1,'mrpc::t_cmd_record']]],
   ['t_5fcustom_5fdrv_2',['t_custom_drv',['../classtst_1_1t__custom__drv.html#a1ae83395d8a3d61af4643aba486f774d',1,'tst::t_custom_drv']]],
   ['t_5fdefer_5frec_3',['t_defer_rec',['../classmrpc_1_1t__defer__rec.html#a061089c87ff7c214fbbb04218c1ed7d9',1,'mrpc::t_defer_rec::t_defer_rec(std::future&lt; t_payload &gt; &amp;a_future)'],['../classmrpc_1_1t__defer__rec.html#a232273f6b2785adaecb6030d8ef2f067',1,'mrpc::t_defer_rec::t_defer_rec()']]],
   ['t_5fiocp_5fblock_4',['t_iocp_block',['../classt__iocp__block.html#aaa7f01f6902315728877d05991253f27',1,'t_iocp_block']]],

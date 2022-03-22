@@ -76,8 +76,8 @@ Inheritance diagram for t_appl:</div>
 <div class="center"><img src="classt__appl__inherit__graph.png" border="0" usemap="#at__appl_inherit__map" alt="Inheritance graph"/></div>
 <map name="at__appl_inherit__map" id="at__appl_inherit__map">
 <area shape="rect" title=" " alt="" coords="112,80,169,107"/>
-<area shape="rect" href="classmrpc_1_1i__listen__rp.html" title=" " alt="" coords="5,5,121,32"/>
-<area shape="rect" href="classmrpc_1_1i__driver__rp__own.html" title=" " alt="" coords="145,5,293,32"/>
+<area shape="rect" href="classmrpc_1_1i__listen__rp.html" title="Интерфейс уведомления о подключении нового драйвера:" alt="" coords="5,5,121,32"/>
+<area shape="rect" href="classmrpc_1_1i__driver__rp__own.html" title="Интерфейс &quot;владельца&quot; драйверов" alt="" coords="145,5,293,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -86,8 +86,8 @@ Collaboration diagram for t_appl:</div>
 <div class="center"><img src="classt__appl__coll__graph.png" border="0" usemap="#at__appl_coll__map" alt="Collaboration graph"/></div>
 <map name="at__appl_coll__map" id="at__appl_coll__map">
 <area shape="rect" title=" " alt="" coords="112,80,169,107"/>
-<area shape="rect" href="classmrpc_1_1i__listen__rp.html" title=" " alt="" coords="5,5,121,32"/>
-<area shape="rect" href="classmrpc_1_1i__driver__rp__own.html" title=" " alt="" coords="145,5,293,32"/>
+<area shape="rect" href="classmrpc_1_1i__listen__rp.html" title="Интерфейс уведомления о подключении нового драйвера:" alt="" coords="5,5,121,32"/>
+<area shape="rect" href="classmrpc_1_1i__driver__rp__own.html" title="Интерфейс &quot;владельца&quot; драйверов" alt="" coords="145,5,293,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -104,13 +104,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afceeaa5e047fdc43bf93c5666f4fa1a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classt__appl.html#afceeaa5e047fdc43bf93c5666f4fa1a9">notify_new_drv_connect</a> (std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt; ap_drv) override</td></tr>
 <tr class="separator:afceeaa5e047fdc43bf93c5666f4fa1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eab27a8f89cfa6c87c2850b914662b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classt__appl.html#a7eab27a8f89cfa6c87c2850b914662b6">request_to_del_drv</a> (<a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> *ap_drv) override</td></tr>
+<tr class="memdesc:a7eab27a8f89cfa6c87c2850b914662b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">уведомление о том, что драйвер стал не рабочим и будет удалён  <a href="classt__appl.html#a7eab27a8f89cfa6c87c2850b914662b6">More...</a><br /></td></tr>
 <tr class="separator:a7eab27a8f89cfa6c87c2850b914662b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmrpc_1_1i__listen__rp"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmrpc_1_1i__listen__rp')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a></td></tr>
 <tr class="memitem:a5ed574cb778e8759751a7665494aacbc inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#a5ed574cb778e8759751a7665494aacbc">notify_new_drv_income</a> (std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt; a_drv)=0</td></tr>
+<tr class="memdesc:a5ed574cb778e8759751a7665494aacbc inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="mdescLeft">&#160;</td><td class="mdescRight">информируем что к серверу кто-то подключился  <a href="classmrpc_1_1i__listen__rp.html#a5ed574cb778e8759751a7665494aacbc">More...</a><br /></td></tr>
 <tr class="separator:a5ed574cb778e8759751a7665494aacbc inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc55d2b39246f7d0432229c6cf12bb00 inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__listen__rp.html#abc55d2b39246f7d0432229c6cf12bb00">notify_new_drv_connect</a> (std::shared_ptr&lt; <a class="el" href="classmrpc_1_1i__driver.html">mrpc::i_driver</a> &gt; a_drv)=0</td></tr>
+<tr class="memdesc:abc55d2b39246f7d0432229c6cf12bb00 inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="mdescLeft">&#160;</td><td class="mdescRight">информинуем что мы подключились к серверу  <a href="classmrpc_1_1i__listen__rp.html#abc55d2b39246f7d0432229c6cf12bb00">More...</a><br /></td></tr>
 <tr class="separator:abc55d2b39246f7d0432229c6cf12bb00 inherit pub_methods_classmrpc_1_1i__listen__rp"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d6f9e6f6f20e9d65f627f3c6f55aac0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__driver__rp__own.html#a8d6f9e6f6f20e9d65f627f3c6f55aac0">request_to_del_drv</a> (<a class="el" href="classmrpc_1_1i__driver.html">i_driver</a> *ap_drv)=0</td></tr>
+<tr class="memdesc:a8d6f9e6f6f20e9d65f627f3c6f55aac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">уведомление о том, что драйвер стал не рабочим и будет удалён  <a href="classmrpc_1_1i__driver__rp__own.html#a8d6f9e6f6f20e9d65f627f3c6f55aac0">More...</a><br /></td></tr>
 <tr class="separator:a8d6f9e6f6f20e9d65f627f3c6f55aac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -253,6 +257,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>уведомление о том, что драйвер стал не рабочим и будет удалён </p>
 
 <p>Implements <a class="el" href="classmrpc_1_1i__driver__rp__own.html#a8d6f9e6f6f20e9d65f627f3c6f55aac0">mrpc::i_driver_rp_own</a>.</p>
 
