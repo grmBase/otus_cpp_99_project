@@ -1,5 +1,5 @@
-<map id="mrpc::tcp_connect" name="mrpc::tcp_connect">
-<area shape="rect" id="node1" title=" " alt="" coords="71,95,199,121"/>
+<map id="mrpc::tcp_drv" name="mrpc::tcp_drv">
+<area shape="rect" id="node1" title=" " alt="" coords="78,95,178,121"/>
 <area shape="rect" id="node2" href="$classmrpc_1_1i__driver.html" title="Интерфейс уведомления о подключении нового драйвера:" alt="" coords="5,13,104,39"/>
-<area shape="rect" id="node3" title=" " alt="" coords="128,5,304,47"/>
+<area shape="rect" id="node3" title=" " alt="" coords="129,5,277,47"/>
 </map>

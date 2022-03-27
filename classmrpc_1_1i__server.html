@@ -104,9 +104,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classmrpc_1_1i__server.html">i_server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#ac27456bb7e3d43cba8f2f44b52bdd1fe">create</a> (uint16_t aun_port, unsigned int aun_num_of_threads, <a class="el" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a> &amp;a_listener, <a class="el" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a> &amp;a_drv_rp)</td></tr>
-<tr class="memdesc:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция конструирующая класс:  <a href="classmrpc_1_1i__server.html#ac27456bb7e3d43cba8f2f44b52bdd1fe">More...</a><br /></td></tr>
-<tr class="separator:ac27456bb7e3d43cba8f2f44b52bdd1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd3917db627c9a4570b72a836405924"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#acbd3917db627c9a4570b72a836405924">create</a> (uint16_t aun_port, unsigned int aun_num_of_threads, <a class="el" href="classmrpc_1_1i__listen__rp.html">mrpc::i_listen_rp</a> &amp;a_listener, <a class="el" href="classmrpc_1_1i__driver__rp__own.html">mrpc::i_driver_rp_own</a> &amp;a_drv_rp)</td></tr>
+<tr class="memdesc:acbd3917db627c9a4570b72a836405924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция конструирующая класс:  <a href="classmrpc_1_1i__server.html#acbd3917db627c9a4570b72a836405924">More...</a><br /></td></tr>
+<tr class="separator:acbd3917db627c9a4570b72a836405924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ec1091934c4a86bba5157011f17e7d"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmrpc_1_1i__server.html#ac9ec1091934c4a86bba5157011f17e7d">create_test</a> ()</td></tr>
+<tr class="memdesc:ac9ec1091934c4a86bba5157011f17e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция конструирующая класс:  <a href="classmrpc_1_1i__server.html#ac9ec1091934c4a86bba5157011f17e7d">More...</a><br /></td></tr>
+<tr class="separator:ac9ec1091934c4a86bba5157011f17e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Класс "обёртка" вокруг boost::asio ядра, с функциями запуска прослушки или коннекта к другому серверу </p>
@@ -177,8 +180,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac27456bb7e3d43cba8f2f44b52bdd1fe" name="ac27456bb7e3d43cba8f2f44b52bdd1fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac27456bb7e3d43cba8f2f44b52bdd1fe">&#9670;&nbsp;</a></span>create()</h2>
+<a id="acbd3917db627c9a4570b72a836405924" name="acbd3917db627c9a4570b72a836405924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd3917db627c9a4570b72a836405924">&#9670;&nbsp;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +190,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a> * mrpc::i_server::create </td>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a> &gt; mrpc::i_server::create </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>aun_port</em>, </td>
@@ -214,6 +217,33 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Функция конструирующая класс: </p>
+
+</div>
+</div>
+<a id="ac9ec1091934c4a86bba5157011f17e7d" name="ac9ec1091934c4a86bba5157011f17e7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ec1091934c4a86bba5157011f17e7d">&#9670;&nbsp;</a></span>create_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classmrpc_1_1i__server.html">mrpc::i_server</a> &gt; mrpc::i_server::create_test </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>

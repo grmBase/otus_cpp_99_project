@@ -1,13 +1,13 @@
 <map id="include/mrpc/i_driver_rp.h" name="include/mrpc/i_driver_rp.h">
-<area shape="rect" id="node1" title=" " alt="" coords="315,5,485,32"/>
-<area shape="rect" id="node2" href="$tcp__connect_8h.html" title=" " alt="" coords="158,80,314,107"/>
-<area shape="rect" id="node6" href="$tst__custom__drv_8h.html" title=" " alt="" coords="490,80,638,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="300,5,471,32"/>
+<area shape="rect" id="node2" href="$tcp__drv_8h.html" title=" " alt="" coords="172,80,300,107"/>
+<area shape="rect" id="node6" href="$tst__custom__drv_8h.html" title=" " alt="" coords="461,80,609,107"/>
 <area shape="rect" id="node3" href="$defer__rec_8h.html" title=" " alt="" coords="5,155,144,181"/>
 <area shape="rect" id="node4" href="$server_8cpp.html" title=" " alt="" coords="169,155,303,181"/>
-<area shape="rect" id="node5" href="$tcp__connect_8cpp.html" title=" " alt="" coords="328,155,499,181"/>
-<area shape="rect" id="node7" href="$appl_8h.html" title=" " alt="" coords="523,155,605,181"/>
-<area shape="rect" id="node11" href="$tst__custom__drv_8cpp.html" title=" " alt="" coords="629,155,792,181"/>
-<area shape="rect" id="node8" href="$bench_2main_8cpp.html" title=" " alt="" coords="378,229,491,256"/>
-<area shape="rect" id="node9" href="$appl_8cpp.html" title=" " alt="" coords="516,229,612,256"/>
-<area shape="rect" id="node10" href="$work__obj_8cpp.html" title=" " alt="" coords="637,229,761,256"/>
+<area shape="rect" id="node5" href="$tcp__drv_8cpp.html" title=" " alt="" coords="327,155,470,181"/>
+<area shape="rect" id="node7" href="$appl_8h.html" title=" " alt="" coords="493,155,576,181"/>
+<area shape="rect" id="node11" href="$tst__custom__drv_8cpp.html" title=" " alt="" coords="600,155,763,181"/>
+<area shape="rect" id="node8" href="$bench_2main_8cpp.html" title=" " alt="" coords="349,229,462,256"/>
+<area shape="rect" id="node9" href="$appl_8cpp.html" title=" " alt="" coords="487,229,583,256"/>
+<area shape="rect" id="node10" href="$work__obj_8cpp.html" title=" " alt="" coords="607,229,731,256"/>
 </map>

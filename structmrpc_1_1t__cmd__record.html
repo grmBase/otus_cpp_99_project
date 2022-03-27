@@ -78,13 +78,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a56177d8237e59475e8728a3980c0291f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#a56177d8237e59475e8728a3980c0291f">t_cmd_record</a> (bool af_is_request, uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;avec_data)</td></tr>
-<tr class="separator:a56177d8237e59475e8728a3980c0291f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c0108193fbc232689a3ccafccceb96d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#a4c0108193fbc232689a3ccafccceb96d">t_cmd_record</a> (<a class="el" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a> a_cmd_type, bool af_is_request, uint32_t adw_req_id, uint32_t adw_func_id, std::vector&lt; uint8_t &gt; &amp;&amp;avec_data)</td></tr>
+<tr class="separator:a4c0108193fbc232689a3ccafccceb96d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a819012c5ac97a62af2c46f74d06822b0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#a819012c5ac97a62af2c46f74d06822b0">~t_cmd_record</a> ()</td></tr>
 <tr class="separator:a819012c5ac97a62af2c46f74d06822b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a3eb5675d8d3d1c0291986cb803635ebb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#a3eb5675d8d3d1c0291986cb803635ebb">m_cmd_type</a></td></tr>
+<tr class="separator:a3eb5675d8d3d1c0291986cb803635ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac171c80073dc487e52de77c11acc6e08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#ac171c80073dc487e52de77c11acc6e08">m_is_request</a></td></tr>
 <tr class="separator:ac171c80073dc487e52de77c11acc6e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfffb57f8b8b1f777d99b5323fa9166c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmrpc_1_1t__cmd__record.html#abfffb57f8b8b1f777d99b5323fa9166c">m_dw_req_id</a></td></tr>
@@ -95,8 +97,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a732a3d7e9d31a85b42393ebd07e46671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a56177d8237e59475e8728a3980c0291f" name="a56177d8237e59475e8728a3980c0291f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56177d8237e59475e8728a3980c0291f">&#9670;&nbsp;</a></span>t_cmd_record()</h2>
+<a id="a4c0108193fbc232689a3ccafccceb96d" name="a4c0108193fbc232689a3ccafccceb96d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c0108193fbc232689a3ccafccceb96d">&#9670;&nbsp;</a></span>t_cmd_record()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -107,6 +109,12 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">mrpc::t_cmd_record::t_cmd_record </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a>&#160;</td>
+          <td class="paramname"><em>a_cmd_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>af_is_request</em>, </td>
         </tr>
@@ -169,6 +177,20 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3eb5675d8d3d1c0291986cb803635ebb" name="a3eb5675d8d3d1c0291986cb803635ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eb5675d8d3d1c0291986cb803635ebb">&#9670;&nbsp;</a></span>m_cmd_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacemrpc_1_1protocol.html#a8c327566ff2965ded86cb56f9774f55b">mrpc::protocol::cmd_type</a> mrpc::t_cmd_record::m_cmd_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0dcd0724e0b022b0595bed3fb32fef1e" name="a0dcd0724e0b022b0595bed3fb32fef1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dcd0724e0b022b0595bed3fb32fef1e">&#9670;&nbsp;</a></span>m_dw_func_id</h2>
 
