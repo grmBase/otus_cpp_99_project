@@ -34,7 +34,7 @@ include_directories(${Boost_INCLUDE_DIR})
 add_library(mrpc_lib SHARED
 
   server.cpp
-  tcp_connect.cpp
+  tcp_drv.cpp
   iocp_block.cpp
 
   sync_console.cpp

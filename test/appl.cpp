@@ -17,7 +17,9 @@ t_appl::t_appl(uint16_t aun_listen_port)
   std::cout << "num of CPU cores detected: " << processor_count << std::endl;
 
   clog::logout("before creating server...");
-  m_p_server.reset(mrpc::i_server::create(aun_listen_port, processor_count, *this, *this));
+
+  std::unique_ptr<mrpc::i_server> tmp(mrpc::i_server::create(aun_listen_port, processor_count, *this, *this));
+  m_p_server.swap(tmp);
   clog::logout("server created");
 
 

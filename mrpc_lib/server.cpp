@@ -9,16 +9,24 @@
 #include "include/mrpc/i_listen_rp.h"  // отсылаем созданные драйвера
 #include "include/mrpc/i_driver_rp_own.h"  // отсылаем созданные драйвера
 //---------------------------------------------------------------------------
-#include "tcp_connect.h"
+#include "tcp_drv.h"
 #include "include/sconsole/sync_console.h" // выводим логи синхронизованно
 //---------------------------------------------------------------------------
 
 
 // Функция конструирующая класс:
-mrpc::i_server* mrpc::i_server::create(uint16_t aun_port, unsigned int aun_num_of_threads,
+std::unique_ptr<mrpc::i_server> mrpc::i_server::create(uint16_t aun_port, unsigned int aun_num_of_threads,
   mrpc::i_listen_rp& a_listener, mrpc::i_driver_rp_own& a_drv_rp)
 {
-  return new t_server(aun_port, aun_num_of_threads, a_listener, a_drv_rp);
+  return std::make_unique<mrpc::t_server>(aun_port, aun_num_of_threads, a_listener, a_drv_rp);
+};
+//---------------------------------------------------------------------------
+
+
+/// Функция конструирующая класс:
+std::unique_ptr<mrpc::i_server> mrpc::i_server::create_test()
+{
+  return nullptr;
 };
 //---------------------------------------------------------------------------
 
@@ -70,7 +78,7 @@ void mrpc::t_server::do_accept()
         a_socket.remote_endpoint().address().to_string() + ":" +
         std::to_string(a_socket.remote_endpoint().port()));
 
-      auto p_driver = std::make_shared<tcp_connect>("recv_drv", std::move(a_socket), *this, m_drv_rp);
+      auto p_driver = std::make_shared<tcp_drv>("recv_drv", std::move(a_socket), *this, m_drv_rp);
 
       m_listen_rp.notify_new_drv_income(p_driver);
 
@@ -154,7 +162,7 @@ int mrpc::t_server::client_connect(const std::string& astr_host, const std::stri
         sp_socket->remote_endpoint().address().to_string() + ":" +
         std::to_string(sp_socket->remote_endpoint().port()));
 
-      auto p_driver = std::make_shared<tcp_connect>("connect_drv", std::move(*sp_socket), *this, m_drv_rp);
+      auto p_driver = std::make_shared<tcp_drv>("connect_drv", std::move(*sp_socket), *this, m_drv_rp);
       m_listen_rp.notify_new_drv_connect(p_driver);
 
     }

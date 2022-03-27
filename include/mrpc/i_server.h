@@ -1,6 +1,8 @@
 //---------------------------------------------------------------------------
 #pragma once
 //---------------------------------------------------------------------------
+#include <memory> //unique_ptr
+//---------------------------------------------------------------------------
 
 
 
@@ -23,9 +25,11 @@ class i_server
   public:
 
     /// Функция конструирующая класс:
-    static i_server* create(uint16_t aun_port, unsigned int aun_num_of_threads,
+    static std::unique_ptr<mrpc::i_server> create(uint16_t aun_port, unsigned int aun_num_of_threads,
       mrpc::i_listen_rp& a_listener, mrpc::i_driver_rp_own& a_drv_rp);
 
+    /// Функция конструирующая класс:
+    static std::unique_ptr<mrpc::i_server> create_test();
 
 
     virtual ~i_server() {};

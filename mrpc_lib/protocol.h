@@ -17,8 +17,9 @@ namespace protocol {
 enum class cmd_type : uint8_t
 {
   undefined = 0xff,
-  custom = 0,
-  keep_alive = 1,
+  custom = 0,        // регулярные посылки пользовательского уровня
+  rejected = 1,      // тип посылки с аварийным ответом: что-то не получилось запустить на стороне сервера
+  keep_alive = 2,    // служебные посылки keep alive
 };
 //---------------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ enum class cmd_type : uint8_t
 #endif
 
 #ifdef _MSC_VER
-#define MRPC_PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#define MRPC_PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__; __pragma( pack(pop))
 #endif
 
 

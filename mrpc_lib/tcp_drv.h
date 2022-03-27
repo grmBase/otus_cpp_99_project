@@ -9,6 +9,8 @@
 #include "protocol.h"
 #include "tcp_read_obj.h"
 #include "defer_rec.h"
+#include "defer_result.h"
+//#include "defer_result.h"
 #include "cmd_record.h"   // храним запросы
 
 #include "include/mrpc/i_driver.h"    // наследуемся
@@ -27,24 +29,23 @@ class t_server;
 using t_payload = std::vector<std::uint8_t>;
 
 
-class tcp_connect
+class tcp_drv
   : public mrpc::i_driver,
-    public std::enable_shared_from_this<tcp_connect>
+    public std::enable_shared_from_this<tcp_drv>
 {
 
   public:
 
-    tcp_connect(const std::string& astr_drv_id,
+    tcp_drv(const std::string& astr_drv_id,
       boost::asio::ip::tcp::socket a_socket,
       t_server& a_server, 
       mrpc::i_driver_rp_own& a_drv_rp_own);
 
     // чтобы отслеживать удаление:
-    ~tcp_connect();
+    ~tcp_drv();
 
     // нужно, иначе нормально выгружаться в разных ситуациях
     void clear_drv_rp() override;
-
 
     //
     void set_drv_rp(mrpc::i_driver_rp* ap_drv_rp) override;
@@ -73,15 +74,14 @@ class tcp_connect
 
 
     // кладём задачу:
-    int push_task_request(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, uint32_t& adw_task_id);
+    int push_task_request(mrpc::protocol::cmd_type a_cmd_type, uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, uint32_t& adw_task_id);
 
     // кладём ответ:
-    int push_task_answer(uint32_t adw_task_id, std::vector<uint8_t>&& avec_data);
+    int push_task_answer(mrpc::protocol::cmd_type a_cmd_type, uint32_t adw_task_id, std::vector<uint8_t>&& avec_data);
 
 
     // кладём задачу на выполнение, инициализируем промис для ожидания:
-    int push_task_4block(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, std::future<t_payload>& a_future);
-
+    int push_task_4block(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, std::future<t_defer_result>& a_future);
 
 
     // смотрим нужно ли начинать запись (выполнять из под крит секции):

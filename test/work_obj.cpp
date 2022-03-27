@@ -32,6 +32,7 @@ TEST(CheckBlockCall, SomeInfo1)
 
 
 
+
 TEST(CheckWorkLoadEmulation, SomeInfo2)
 {
   std::cout << "in start of test func" << std::endl;

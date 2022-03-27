@@ -3,7 +3,7 @@
 #include <memory.h>
 #include <iostream>
 //---------------------------------------------------------------------------
-#include "tcp_connect.h"
+#include "tcp_drv.h"
 #include "include/sconsole/sync_console.h"
 #include "server.h"
 #include "protocol.h"
@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 
 
-mrpc::tcp_connect::tcp_connect(const std::string& astr_drv_id,
+mrpc::tcp_drv::tcp_drv(const std::string& astr_drv_id,
   boost::asio::ip::tcp::socket a_socket, t_server& a_server,
   mrpc::i_driver_rp_own& a_drv_rp_own)
   : m_str_drv_id(astr_drv_id),
@@ -29,9 +29,9 @@ mrpc::tcp_connect::tcp_connect(const std::string& astr_drv_id,
 //---------------------------------------------------------------------------
 
 
-mrpc::tcp_connect::~tcp_connect()
+mrpc::tcp_drv::~tcp_drv()
 {
-  logout("in destructor of tcp_connect");
+  logout("in destructor of tcp_drv");
 
 
   std::lock_guard lock(m_mutex);
@@ -39,16 +39,15 @@ mrpc::tcp_connect::~tcp_connect()
   // пробежимся и "отпустим" все ожидающие задачи
   for(auto& curr : m_map_defer_tasks)
   {
-
     // некая пустая нагрузка. По идее здесь должен быть код ошибки ожидания
-    mrpc::t_payload payload;
-    curr.second->set_promise(std::move(payload));
+    mrpc::t_defer_result result(-33, mrpc::t_payload{});
+    curr.second->set_promise(std::move(result));
   }
 }
 //---------------------------------------------------------------------------
 
 
-void mrpc::tcp_connect::set_drv_rp(mrpc::i_driver_rp* ap_drv_rp)
+void mrpc::tcp_drv::set_drv_rp(mrpc::i_driver_rp* ap_drv_rp)
 {
   std::lock_guard lock(m_mutex);
   mp_drv_rp = ap_drv_rp;
@@ -56,7 +55,7 @@ void mrpc::tcp_connect::set_drv_rp(mrpc::i_driver_rp* ap_drv_rp)
 //---------------------------------------------------------------------------
 
 
-int mrpc::tcp_connect::start()
+int mrpc::tcp_drv::start()
 {
   do_read();
 
@@ -65,7 +64,7 @@ int mrpc::tcp_connect::start()
 //---------------------------------------------------------------------------
 
 
-void mrpc::tcp_connect::tcp_connect::do_read()
+void mrpc::tcp_drv::tcp_drv::do_read()
 {
 
   if(!m_p_read_obj) {
@@ -142,7 +141,7 @@ void mrpc::tcp_connect::tcp_connect::do_read()
 //---------------------------------------------------------------------------
 
 
-void mrpc::tcp_connect::do_write()
+void mrpc::tcp_drv::do_write()
 {
 
   auto self(shared_from_this());
@@ -183,7 +182,7 @@ void mrpc::tcp_connect::do_write()
 
 
 // отработать, то что что-то ушло в сеть:
-void mrpc::tcp_connect::handle_written(std::size_t a_written)
+void mrpc::tcp_drv::handle_written(std::size_t a_written)
 {
 
   { 
@@ -216,9 +215,8 @@ void mrpc::tcp_connect::handle_written(std::size_t a_written)
 //---------------------------------------------------------------------------
 
 
-
 // похожу нужно, иначе падаем при удалении
-void mrpc::tcp_connect::clear_drv_rp()
+void mrpc::tcp_drv::clear_drv_rp()
 {
   // под мьютексом, т.к. удаляем из дефер буфера
   std::lock_guard lock(m_mutex);
@@ -227,27 +225,29 @@ void mrpc::tcp_connect::clear_drv_rp()
 //---------------------------------------------------------------------------
 
 
-void mrpc::tcp_connect::handle_complete_msg()
+void mrpc::tcp_drv::handle_complete_msg()
 {
   logout("in handle_complete_msg");
   logout("Cmd info: " + print_header(m_p_read_obj->m_header));
 
  
   // Если это запрос, то по любому отправляем на исполнение "серванту":
-  if (m_p_read_obj->m_header.m_is_request) {
+  if(m_p_read_obj->m_header.m_is_request) 
+  {
 
     // под крит секцией
     std::lock_guard lock(m_mutex);
 
     if(!mp_drv_rp) {
 
-      // вернуть хоть какой-то результат на ту строну:
-      std::vector<uint8_t> vec_tmp;
-      int n_res = put_answer(m_p_read_obj->m_header.m_dw_task_id, std::move(vec_tmp));
-      if (n_res) {
-        clog::log_err("!!! Error in put_answer()");
-        return;
+      // Вернём "аварийный" ответ:
+      int n_res = push_task_answer(mrpc::protocol::cmd_type::rejected, 
+        m_p_read_obj->m_header.m_dw_task_id, mrpc::t_payload{});
+      if(n_res) {
+        log_err("error in push_task_answer()");
+        return ;
       }
+
 
       clog::log_err("rp already nullptr");
       return;
@@ -270,7 +270,7 @@ void mrpc::tcp_connect::handle_complete_msg()
       const auto& record = *iter;
 
       logout("before set_promise()");
-      record.second->set_promise(std::move(m_p_read_obj->m_vec_payload));
+      record.second->set_promise(std::move(t_defer_result{0, std::move(m_p_read_obj->m_vec_payload)}));
       logout("after set_promise()");
 
       m_map_defer_tasks.erase(iter);
@@ -286,11 +286,11 @@ void mrpc::tcp_connect::handle_complete_msg()
 
 
 // Забросить задание на выполнение:
-int mrpc::tcp_connect::put_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, uint32_t& adw_taskid)
+int mrpc::tcp_drv::put_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, uint32_t& adw_taskid)
 {
   adw_taskid = 0;
 
-  int n_res = push_task_request(adw_func_id, std::move(a_buf), adw_taskid);
+  int n_res = push_task_request(mrpc::protocol::cmd_type::custom, adw_func_id, std::move(a_buf), adw_taskid);
   if (n_res) {
     log_err("error in push_task_request()");
     return n_res;
@@ -303,12 +303,12 @@ int mrpc::tcp_connect::put_request(uint32_t adw_func_id, std::vector<uint8_t>&& 
 
 
 // Забросить ответ на задание:
-int mrpc::tcp_connect::put_answer(uint32_t adw_req_id, std::vector<uint8_t>&& a_buf)
+int mrpc::tcp_drv::put_answer(uint32_t adw_req_id, std::vector<uint8_t>&& a_buf)
 {
 
   // "-1"  - id функции. в ответе не используется
-  int n_res = push_task_answer(adw_req_id, std::move(a_buf));
-  if (n_res) {
+  int n_res = push_task_answer(mrpc::protocol::cmd_type::custom, adw_req_id, std::move(a_buf));
+  if(n_res) {
     log_err("error in push_task_answer()");
     return n_res;
   }
@@ -319,19 +319,14 @@ int mrpc::tcp_connect::put_answer(uint32_t adw_req_id, std::vector<uint8_t>&& a_
 
 
 // выполнить блокирующий запрос
-int mrpc::tcp_connect::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, 
+int mrpc::tcp_drv::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&& a_buf, 
   std::vector<uint8_t>& a_res)
 {
   
-  /*uint8_t b_first = 0;
-  if(a_buf.size()) {
-    b_first = a_buf[0];
-  }*/
-
   clog::logout("size of out_res before call: " + std::to_string(a_res.size()));
 
   // кладём задачу на выполнение, инициализируем промис для ожидания:
-  std::future<t_payload> a_future;
+  std::future<t_defer_result> a_future;
   int n_res = push_task_4block(adw_func_id, std::move(a_buf), a_future);
   if (n_res) {
     log_err("error in push_task_4block()");
@@ -355,7 +350,13 @@ int mrpc::tcp_connect::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&&
   //const auto& result = a_future.get();
 
   // кладём в выходные данные:
-  a_res = std::move(a_future.get());
+  const t_defer_result& result = a_future.get();
+  if(result.m_n_res_code != 0) {
+    clog::log_err("return result is not OK. code: " + std::to_string(result.m_n_res_code));
+    return result.m_n_res_code;
+  }
+
+  a_res = std::move(result.m_payload);
 
   clog::logout("size of out_res after call: " + std::to_string(a_res.size()));
 
@@ -368,8 +369,8 @@ int mrpc::tcp_connect::exec_request(uint32_t adw_func_id, std::vector<uint8_t>&&
 
 
 // кладём задачу на выполнение:
-int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, 
-  uint32_t& adw_task_id)
+int mrpc::tcp_drv::push_task_request(mrpc::protocol::cmd_type a_cmd_type, 
+  uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, uint32_t& adw_task_id)
 {
   // обнуляем выходные данные:
   adw_task_id = 0;
@@ -384,7 +385,7 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
     m_dwLastTaskID++;
 
 
-    auto rec = std::make_unique<mrpc::t_cmd_record>(true, adw_task_id, adw_func_id, std::move(avec_data));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(a_cmd_type, true, adw_task_id, adw_func_id, std::move(avec_data));
 
     m_queue.emplace(std::move(rec));
 
@@ -404,15 +405,14 @@ int mrpc::tcp_connect::push_task_request(uint32_t adw_func_id, std::vector<uint8
 //---------------------------------------------------------------------------
 
 
-
 // кладём ответ:
-int mrpc::tcp_connect::push_task_answer(uint32_t adw_task_id, std::vector<uint8_t>&& avec_data)
+int mrpc::tcp_drv::push_task_answer(mrpc::protocol::cmd_type a_cmd_type, uint32_t adw_task_id, 
+  std::vector<uint8_t>&& avec_data)
 {
   {
     std::lock_guard lock(m_mutex);
 
-    //todo: заменить на make_unique
-    auto rec = std::make_unique<mrpc::t_cmd_record>(false, adw_task_id, -1, std::move(avec_data));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(a_cmd_type, false, adw_task_id, -1, std::move(avec_data));
 
     m_queue.emplace(std::move(rec));
 
@@ -427,8 +427,8 @@ int mrpc::tcp_connect::push_task_answer(uint32_t adw_task_id, std::vector<uint8_
 
 
 // кладём задачу на выполнение, инициализируем промис для ожидания:
-int mrpc::tcp_connect::push_task_4block(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, 
-  std::future<t_payload>& a_future)
+int mrpc::tcp_drv::push_task_4block(uint32_t adw_func_id, std::vector<uint8_t>&& avec_data, 
+  std::future<t_defer_result>& a_future)
 {
   {
     std::lock_guard lock(m_mutex);
@@ -437,7 +437,7 @@ int mrpc::tcp_connect::push_task_4block(uint32_t adw_func_id, std::vector<uint8_
     uint32_t dw_task_id = m_dwLastTaskID;
     m_dwLastTaskID++;
 
-    auto rec = std::make_unique<mrpc::t_cmd_record>(true, dw_task_id, adw_func_id, std::move(avec_data));
+    auto rec = std::make_unique<mrpc::t_cmd_record>(mrpc::protocol::cmd_type::custom, true, dw_task_id, adw_func_id, std::move(avec_data));
     // пока просто ++ без проверки. TODO: проверить, что такой же нет в буфере, если есть, то inc пока не найдём свободной
     
     m_queue.emplace(std::move(rec));
@@ -456,7 +456,7 @@ int mrpc::tcp_connect::push_task_4block(uint32_t adw_func_id, std::vector<uint8_
 
 
 // смотрим нужно ли начинать запись:
-void mrpc::tcp_connect::check_start_write()
+void mrpc::tcp_drv::check_start_write()
 {
 
   if(m_write_buf.size() && (m_write_buf_pos != m_write_buf.size())) {
@@ -501,14 +501,14 @@ void mrpc::tcp_connect::check_start_write()
 };
 //---------------------------------------------------------------------------
 
-void mrpc::tcp_connect::logout(const std::string& astr_info)
+void mrpc::tcp_drv::logout(const std::string& astr_info)
 {
   clog::logout("'" + m_str_drv_id + "' " + astr_info);
 };
 //---------------------------------------------------------------------------
 
 
-void mrpc::tcp_connect::log_err(const std::string& astr_info)
+void mrpc::tcp_drv::log_err(const std::string& astr_info)
 {
   clog::log_err("'" + m_str_drv_id + "' " + astr_info);
 };

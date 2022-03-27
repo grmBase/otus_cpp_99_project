@@ -14,6 +14,7 @@
 tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, size_t a_num_of_threads,
   bool af_send_requests)
   : mp_drv(ap_drv),
+    m_threads{5},
     m_pool{a_num_of_threads}
 {
 
@@ -34,6 +35,30 @@ tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, size_t a
   clog::logout("before start thread...");
 
   if(af_send_requests) {
+
+    // запускаем нити:
+    for (auto& curr : m_threads) {
+      curr = std::thread(
+      [this]
+      {
+        try 
+        {
+          this->work();
+        }
+        catch (const std::exception& ex)
+        {
+          clog::log_err(std::string("Exception in work. details: ") + ex.what());
+        }
+        catch (...)
+        {
+          clog::log_err("Exception '...' in thread");
+        }
+      }
+      );
+
+    };
+
+    /*
     m_thread = std::thread(
       [this] 
       {
@@ -50,8 +75,9 @@ tst::t_custom_drv::t_custom_drv(std::shared_ptr<mrpc::i_driver> ap_drv, size_t a
         }
       }
     );
+    */
   }
-  clog::logout("after thread started");
+  clog::logout("after threads started");
 };
 //---------------------------------------------------------------------------
 
@@ -129,7 +155,7 @@ tst::t_custom_drv::~t_custom_drv()
       m_exit_flag = true;
     }
 
-    m_cv.notify_one();
+    m_cv.notify_all();
   }
   clog::logout("after set_exit() flag for thread");
 
@@ -140,11 +166,17 @@ tst::t_custom_drv::~t_custom_drv()
   clog::logout("after reset mrpc driver...");
 
 
-  if(m_thread.joinable()) {
-    clog::logout("before thread join");
-    m_thread.join();
-    clog::logout("after thread join");
+  clog::logout("before join() threads");
+  for (auto& curr : m_threads) 
+  {
+    if(curr.joinable()) {
+      clog::logout("before thread join");
+      curr.join();
+      clog::logout("after thread join");
+    }
+
   };
+
 };
 //---------------------------------------------------------------------------
 
@@ -257,13 +289,24 @@ void tst::t_custom_drv::handle_net_request(uint32_t adw_req_id,
   if(adw_func_id == 1) 
   {
     boost::asio::post(m_pool, 
-      [adw_req_id, this]
+      [adw_req_id, a_vec_req, this]
       {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         clog::logout("handling in thread completed");
 
+
         // пока просто что-нибудь вернуть, todo: реально что-то модифицировать
         std::vector<uint8_t> vec_results;
+        vec_results.resize(a_vec_req.size());
+
+        // В тестовой функции просто увеличиваем на 1-цу
+        std::transform(a_vec_req.begin(), a_vec_req.end(), vec_results.begin(),
+          [](uint8_t x) -> uint8_t
+          {
+            return x + 1;
+          });
+
+
 
         auto tmp = mp_drv.lock();
         if (!tmp) {

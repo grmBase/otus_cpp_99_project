@@ -42,7 +42,6 @@ class t_custom_drv : public mrpc::i_driver_rp
 
 
 
-
   private:
 
     // делаем некий блокирующий вызов:
@@ -63,7 +62,11 @@ class t_custom_drv : public mrpc::i_driver_rp
 
 
     // нитка из которой будем посылать запросы
-    std::thread m_thread;
+    //std::thread m_thread;
+
+    // здесь храним список рабочих нитей
+    std::vector<std::thread> m_threads;
+
 
     bool m_exit_flag = false;
     mutable std::mutex m_mutex;     // защита от мнгопоточного доступа

@@ -1,6 +1,9 @@
 //---------------------------------------------------------------------------
 #pragma once
 //---------------------------------------------------------------------------
+#include "protocol.h" // cmd_type
+//---------------------------------------------------------------------------
+
 
 
 namespace mrpc
@@ -8,15 +11,16 @@ namespace mrpc
 
 
 /*
-    Запись о одном запросе/ ответе 
+    Запись об одном запросе/ ответе 
 */
 struct t_cmd_record
 {
   public:
 
-    t_cmd_record(bool af_is_request, uint32_t adw_req_id, 
+    t_cmd_record(mrpc::protocol::cmd_type a_cmd_type, bool af_is_request, uint32_t adw_req_id,
        uint32_t adw_func_id, std::vector<uint8_t>&& avec_data)
-    : m_is_request(af_is_request),
+    : m_cmd_type(a_cmd_type),
+      m_is_request(af_is_request),
       m_dw_req_id(adw_req_id),
       m_dw_func_id(adw_func_id),
       m_vec_data(avec_data)
@@ -27,6 +31,8 @@ struct t_cmd_record
 
 
   // ************ Данные *****************
+    // служебное или пользовательское сообщение
+    mrpc::protocol::cmd_type m_cmd_type;
 
     bool m_is_request;
 
